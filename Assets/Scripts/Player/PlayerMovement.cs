@@ -1,26 +1,29 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace HauntedIsland
 {
-    [SerializeField] private float movementSpeed;
-    private CharacterController characterController;
-    private float horizontalInput;
-    private float verticalInput;
-    private Vector3 movementDirection;
+    public class PlayerMovement : MonoBehaviour
+    {
+        [SerializeField] private float movementSpeed;
+        private CharacterController characterController;
+        private float horizontalInput;
+        private float verticalInput;
+        private Vector3 movementDirection;
 
-    private void Awake() {
-        characterController = GetComponent<CharacterController>();
-    }
+        private void Awake() {
+            characterController = GetComponent<CharacterController>();
+        }
 
-    private void Update(){
-        UpdatePlayerMovement();
-    }
+        private void Update(){
+            UpdatePlayerMovement();
+        }
 
-    private void UpdatePlayerMovement(){
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-        movementDirection = transform.forward*verticalInput + transform.right*horizontalInput;
-        movementDirection = movementDirection.normalized;
-        characterController.SimpleMove(movementDirection * movementSpeed);
+        private void UpdatePlayerMovement(){
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
+            movementDirection = transform.forward*verticalInput + transform.right*horizontalInput;
+            movementDirection = movementDirection.normalized;
+            characterController.SimpleMove(movementDirection * movementSpeed);
+        }
     }
 }

@@ -4,18 +4,17 @@ using UnityEngine;
 
 namespace HauntedIsland
 {
-    public class ChaseState : MonoBehaviour
+    public class PlayerInfoTransmitter : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public bool transmitInfo;
 
+        private void Start() {
+            transmitInfo = true;
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
-
+        
         }
     }
 }
