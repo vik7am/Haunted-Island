@@ -25,5 +25,9 @@ namespace HauntedIsland
             movementDirection = movementDirection.normalized;
             characterController.SimpleMove(movementDirection * movementSpeed);
         }
+
+        public bool IsIdle(){
+            return movementDirection == Vector3.zero;
+        }
     }
 }

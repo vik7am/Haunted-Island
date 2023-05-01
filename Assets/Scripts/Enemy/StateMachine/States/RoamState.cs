@@ -8,13 +8,20 @@ namespace HauntedIsland
         private NavMeshAgent navmeshAgent;
         private Vector3 destination;
         private bool destinationFound;
-        private float roamRange = 20;
+        private float roamRange;
 
         public RoamState(EnemyMovementStateMachine stateMachine) : base(stateMachine) {
             navmeshAgent = stateMachine.navmeshAgent;
         }
 
+        public override void OnEnterState(){
+            roamRange = stateMachine.roamRange;
+            stateMachine.navmeshAgent.isStopped = false;
+        }
+
         public override void Tick(){
+            if(stateMachine.playerDetected)
+                stateMachine.ChangeState(new ChaseState(stateMachine));
             if(destinationFound)
                 CheckDistance();
             else
