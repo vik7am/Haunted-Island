@@ -5,6 +5,6 @@ using UnityEngine;
 namespace HauntedIsland
 {
     public interface IDetector{
-        public void Detect(Transform info);
+        public void Detect(Transform other);
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace HauntedIsland
 {
-    public class CampFire : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
-        public void BurnItem(Bone bone)
-        {
-            bone.BurnBone();
+        public void kill(){
+            Destroy(gameObject);
         }
+        
     }
 }

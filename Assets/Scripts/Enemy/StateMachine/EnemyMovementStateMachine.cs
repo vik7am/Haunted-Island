@@ -33,10 +33,10 @@ namespace HauntedIsland
                 currentState.OnEnterState();
         }
 
-        public void Detect(Transform info)
+        public void Detect(Transform other)
         {
             playerDetected = true;
-            playerTransform = info;
+            playerTransform = other;
         }
 
         public void PlayerOutOfRange(){
