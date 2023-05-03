@@ -9,23 +9,29 @@ namespace HauntedIsland
         [SerializeField] LayerMask enemyLayer;
         [SerializeField] private float transmittionRadius;
         private PlayerMovement playerMovement;
-        private RaycastHit[] hits;
+        private Collider[] colliders;
+        public bool transmitterActive;
         
 
         private void Awake() {
+            transmitterActive = true;
             playerMovement = GetComponent<PlayerMovement>();
         }
 
+        public void SetTransmission(bool status){
+            transmitterActive = status;
+        }
+
         private void FixedUpdate() {
-            if(playerMovement.IsIdle())
+            if(playerMovement.IsIdle() || !transmitterActive)
                 return;
             TransmitInfo();
         }
 
         public void TransmitInfo(){
-            hits = Physics.SphereCastAll(transform.position, transmittionRadius, Vector3.forward, 0f, enemyLayer, QueryTriggerInteraction.UseGlobal);
-            foreach(RaycastHit hit in hits){
-                IDetector detector =  hit.transform.GetComponent<IDetector>();
+            colliders = Physics.OverlapSphere(transform.position, transmittionRadius, enemyLayer, QueryTriggerInteraction.Collide);
+            foreach(Collider collider in colliders){
+                IDetector detector =  collider.transform.GetComponent<IDetector>();
                 if(detector != null){
                     detector.Detect(transform);
                 }

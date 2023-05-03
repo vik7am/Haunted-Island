@@ -29,5 +29,9 @@ namespace HauntedIsland
         public bool IsIdle(){
             return movementDirection == Vector3.zero;
         }
+
+        private void OnTriggerEnter(Collider other) {
+            //Debug.Log("something happened");
+        }
     }
 }
