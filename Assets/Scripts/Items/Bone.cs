@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HauntedIsland
 {
-    public class Bone : MonoBehaviour
+    public class Bone : MonoBehaviour, IInteractable
     {
         [SerializeField] private Enemy enemy;
         
@@ -12,9 +12,15 @@ namespace HauntedIsland
             enemy.kill();
         }
 
-        void Update()
+        public string getItemInfo()
         {
-        
+            return "Bone";
+        }
+
+        public void Interact(Inventory inventory)
+        {
+            Debug.Log("Bone Interaction");
+            inventory.CollectItem(this);
         }
     }
 }
