@@ -22,11 +22,11 @@ namespace HauntedIsland
             transmitterActive = status;
         }
 
-        // private void FixedUpdate() {
-        //     if(playerMovement.IsIdle() || !transmitterActive)
-        //         return;
-        //     TransmitInfo();
-        // }
+        private void FixedUpdate() {
+            if(playerMovement.IsIdle() || !transmitterActive)
+                return;
+            TransmitInfo();
+        }
 
         public void TransmitInfo(){
             colliders = Physics.OverlapSphere(transform.position, transmittionRadius, enemyLayer, QueryTriggerInteraction.Collide);
