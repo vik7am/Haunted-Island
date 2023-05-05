@@ -14,6 +14,7 @@ namespace HauntedIsland
         
         public void BurnBone(){
             enemy.kill();
+            GameManager.Instance.EnemyKilled();
         }
 
         public string GetItemName(){

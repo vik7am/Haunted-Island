@@ -7,10 +7,6 @@ namespace HauntedIsland
 {
     public class CampFire : MonoBehaviour, IInteractable
     {
-        // public void BurnItem(Bone bone){
-        //     bone.BurnBone();
-        // }
-
         public string GetItemName(){
             return "Campfire";
         }

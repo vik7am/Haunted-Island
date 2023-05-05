@@ -9,6 +9,20 @@ namespace HauntedIsland
         private float mouseX, mouseY;
         private float xRotation;
         private bool gameRunning;
+        private Vector3 orignalPosition;
+        private Quaternion originalRotation;
+
+        private void Start() {
+            orignalPosition = transform.position;
+            originalRotation = transform.rotation;
+        }
+
+        public void DetachCamera(){
+            transform.SetParent(null);
+            transform.position = orignalPosition;
+            transform.rotation = originalRotation;
+            gameRunning = false;
+        }
     
         public void FollowPlayer(Transform playerTransform){
             gameRunning = true;

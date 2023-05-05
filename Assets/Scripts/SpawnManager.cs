@@ -39,9 +39,30 @@ namespace HauntedIsland
             }
         }
 
-        internal Transform GetPlayerTransForm()
+        public Transform GetPlayerTransForm()
         {
             return player.transform;
+        }
+
+        public void Despawn()
+        {
+            if(player != null)
+                Destroy(player.gameObject);
+            for(int i=0; i<enemiesSpawnPos.Length; i++){
+                if(enemyList[i] != null){
+                    Destroy(enemyList[i].gameObject);
+                    if(boneList[i] != null){
+                        Destroy(boneList[i].gameObject);
+                    }
+                }
+            }
+            player = null;
+            enemyList.Clear();
+            boneList.Clear();
+        }
+
+        public int GetEnemyCount(){
+            return enemyList.Count;
         }
     }
 }
