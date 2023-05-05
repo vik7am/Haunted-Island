@@ -7,23 +7,25 @@ namespace HauntedIsland
 {
     public class CampFire : MonoBehaviour, IInteractable
     {
-        Bone bone;
+        // public void BurnItem(Bone bone){
+        //     bone.BurnBone();
+        // }
 
-        public void BurnItem(Bone bone)
-        {
-            bone.BurnBone();
-        }
-
-        public string getItemInfo()
-        {
+        public string GetItemName(){
             return "Campfire";
         }
 
-        public void Interact(Inventory inventory)
-        {
-            Debug.Log("Campfire interaction");
-            bone = inventory.DropItem();
+        public string GetActionInfo(Inventory inventory){
+            if(inventory.GetItem())
+                return "Press E to Burn Bone";
+            return "";
+        }
+
+        public void Interact(Inventory inventory){
+            Bone bone = inventory.GetItem();
+            inventory.DropItem();
             bone.BurnBone();
+            Destroy(bone.gameObject);
         }
     }
 }

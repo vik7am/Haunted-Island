@@ -4,17 +4,24 @@ namespace HauntedIsland
 {
     public class FirstPersonCamera : MonoBehaviour
     {
-        [SerializeField] private Transform playerTransform;
+        private Transform playerTransform;
         [SerializeField] private float cameraSensitivity;
         private float mouseX, mouseY;
         private float xRotation;
+        private bool gameRunning;
     
-        void Awake(){
+        public void FollowPlayer(Transform playerTransform){
+            gameRunning = true;
+            this.playerTransform = playerTransform;
             transform.SetParent(playerTransform);
+            transform.localPosition = new Vector3(0, 1, 0);
+            transform.localRotation = Quaternion.identity;
             Cursor.lockState = CursorLockMode.Locked;
         }
     
         void Update(){
+            if(!gameRunning)
+                return;
             UpdatateCameraRotation();
             UpdatePlayerRotation();
         }

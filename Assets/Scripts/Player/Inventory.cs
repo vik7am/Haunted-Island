@@ -6,7 +6,8 @@ namespace HauntedIsland
 {
     public interface IInteractable{
         public void Interact(Inventory inventory);
-        public string getItemInfo();
+        public string GetItemName();
+        public string GetActionInfo(Inventory inventory);
     }
     public class Inventory : MonoBehaviour
     {
@@ -38,11 +39,19 @@ namespace HauntedIsland
                 if(currentInteractable != null && currentInteractable == item)
                     return;
                 currentInteractable = item;
-                string itemInfo = currentInteractable.getItemInfo();
-                Debug.Log(" ItemInfo : " + itemInfo);
+                UpdateHUDUI();
+                UIManager.Instance.SetHUDVisibility(true);
             }
-            else
+            else{
                 currentInteractable = null;
+                UIManager.Instance.SetHUDVisibility(false);
+            }
+        }
+
+        private void UpdateHUDUI(){
+            string itemName = currentInteractable.GetItemName();
+            string itemInfo = currentInteractable.GetActionInfo(this);
+            UIManager.Instance.SetHUDData(itemName, itemInfo);
         }
 
         public void CollectItem(Bone bone){
@@ -51,8 +60,13 @@ namespace HauntedIsland
             bone.gameObject.SetActive(false);
         }
 
-        public Bone DropItem(){
+        public Bone GetItem(){
             return bone;
+        }
+
+        public void DropItem(){
+            bone = null;
+            UpdateHUDUI();
         }
     }
 }

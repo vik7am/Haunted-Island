@@ -6,20 +6,25 @@ namespace HauntedIsland
 {
     public class Bone : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Enemy enemy;
+        public Enemy enemy {get; private set;}
+
+        public void SetEnemy(Enemy enemy){
+            this.enemy = enemy;
+        }
         
         public void BurnBone(){
             enemy.kill();
         }
 
-        public string getItemInfo()
-        {
+        public string GetItemName(){
             return "Bone";
         }
 
-        public void Interact(Inventory inventory)
-        {
-            Debug.Log("Bone Interaction");
+        public string GetActionInfo(Inventory inventory){
+            return "Press E to Take";
+        }
+
+        public void Interact(Inventory inventory){
             inventory.CollectItem(this);
         }
     }
