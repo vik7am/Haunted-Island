@@ -20,7 +20,7 @@ namespace HauntedIsland
         }
 
         public override void Tick(){
-            if(stateMachine.playerDetected)
+            if(stateMachine.enemy.playerDetected)
                 stateMachine.ChangeState(new ChaseState(stateMachine));
             if(destinationFound)
                 CheckDistance();

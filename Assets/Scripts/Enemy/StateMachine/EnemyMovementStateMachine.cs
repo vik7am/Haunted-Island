@@ -3,18 +3,19 @@ using UnityEngine.AI;
 
 namespace HauntedIsland
 {
-    public class EnemyMovementStateMachine : MonoBehaviour, IDetector
+    public class EnemyMovementStateMachine : MonoBehaviour
     {
         [field: SerializeField] public float idleDuration {get; private set;}
         [field: SerializeField] public float roamRange {get; private set;}
         [field: SerializeField] public float chaseRange {get; private set;}
+        [field: SerializeField] public float attackRange {get; private set;}
         public NavMeshAgent navmeshAgent {get; private set;}
-        public bool playerDetected {get; private set;}
-        public Transform playerTransform {get; private set;}
         private BaseState currentState;
+        public Enemy enemy {get; private set;}
 
         private void Awake() {
             navmeshAgent = GetComponent<NavMeshAgent>();
+            enemy = GetComponent<Enemy>();
         }
 
         private void Start() {
@@ -33,15 +34,6 @@ namespace HauntedIsland
                 currentState.OnEnterState();
         }
 
-        public void Detect(Transform other)
-        {
-            playerDetected = true;
-            playerTransform = other;
-        }
-
-        public void PlayerOutOfRange(){
-            playerDetected = false;
-            playerTransform = null;
-        }
+        
     }
 }

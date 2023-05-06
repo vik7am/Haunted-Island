@@ -11,7 +11,7 @@ namespace HauntedIsland
     }
     public class Inventory : MonoBehaviour
     {
-        private Bone bone;
+        public List<Bone> boneList;
         private Collider[] colliders;
         [SerializeField] private float interactionRange;
         [SerializeField] private LayerMask interactableLayer;
@@ -20,6 +20,7 @@ namespace HauntedIsland
 
         private void Start() {
             camTransform = Camera.main.transform;
+            boneList = new List<Bone>();
         }
 
         private void Update() {
@@ -55,17 +56,17 @@ namespace HauntedIsland
         }
 
         public void CollectItem(Bone bone){
-            this.bone = bone;
+            boneList.Add(bone);
             bone.transform.SetParent(transform);
             bone.gameObject.SetActive(false);
         }
 
-        public Bone GetItem(){
-            return bone;
+        public List<Bone> GetItems(){
+            return boneList;
         }
 
-        public void DropItem(){
-            bone = null;
+        public void DropItems(){
+            boneList.Clear();
             UpdateHUDUI();
         }
     }

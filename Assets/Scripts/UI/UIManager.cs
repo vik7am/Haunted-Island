@@ -17,18 +17,22 @@ namespace HauntedIsland
         //MainMenu
         public GameObject mainMenuPanel;
         public Button startButton;
+        public Button exitButton1;
 
         //PauseMenu
         public GameObject pauseMenuPanel;
         public Button resumeButton;
+        public Button exitButton2;
 
         //GameOverMenu
         public GameObject gameOverPanel;
         public Button restartButton1;
+        public Button exitButton3;
 
          //GameWonMenu
         public GameObject gameWonPanel;
         public Button restartButton2;
+        public Button exitButton4;
 
         private void Start() {
             HUDPanel.SetActive(false);
@@ -37,6 +41,14 @@ namespace HauntedIsland
             resumeButton.onClick.AddListener(ResumeGame);
             restartButton1.onClick.AddListener(RestartGame);
             restartButton2.onClick.AddListener(RestartGame);
+            exitButton1.onClick.AddListener(ExitGame);
+            exitButton2.onClick.AddListener(ExitGame);
+            exitButton3.onClick.AddListener(ExitGame);
+            exitButton4.onClick.AddListener(ExitGame);
+        }
+
+        private void ExitGame(){
+            Application.Quit();
         }
 
         private void RestartGame(){

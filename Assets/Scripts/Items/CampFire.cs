@@ -12,16 +12,17 @@ namespace HauntedIsland
         }
 
         public string GetActionInfo(Inventory inventory){
-            if(inventory.GetItem())
-                return "Press E to Burn Bone";
+            if(inventory.GetItems().Count > 0)
+                return "Press E to Burn Bones";
             return "";
         }
 
         public void Interact(Inventory inventory){
-            Bone bone = inventory.GetItem();
-            inventory.DropItem();
-            bone.BurnBone();
-            Destroy(bone.gameObject);
+            foreach(Bone bone in inventory.boneList){
+                bone.BurnBone();
+                Destroy(bone.gameObject);
+            }
+            inventory.DropItems();
         }
     }
 }

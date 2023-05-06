@@ -9,15 +9,16 @@ namespace HauntedIsland
         private NavMeshAgent navmeshAgent;
         private float chaseRange;
         private Transform playerTransform;
-        private float attackRange = 5;
+        private float attackRange;
 
         public ChaseState(EnemyMovementStateMachine stateMachine) : base(stateMachine) {
             navmeshAgent = stateMachine.navmeshAgent;
         }
 
         public override void OnEnterState(){
-            playerTransform = stateMachine.playerTransform;
+            playerTransform = stateMachine.enemy.playerTransform;
             chaseRange = stateMachine.chaseRange;
+            attackRange = stateMachine.attackRange;
             stateMachine.navmeshAgent.isStopped = false;
         }
 
@@ -42,9 +43,9 @@ namespace HauntedIsland
         private bool CheckChaseRange()
         {
             float distance = Vector3.Distance(stateMachine.transform.position, playerTransform.position);
-            if(distance <=chaseRange)
+            if(distance <= chaseRange)
                 return true;
-                stateMachine.PlayerOutOfRange();
+                stateMachine.enemy.PlayerOutOfRange();
             return false;
         }
     }

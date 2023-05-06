@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5075307049549529928}
   - component: {fileID: 5075307049549529931}
   - component: {fileID: 5075307049549529929}
-  - component: {fileID: 5075307049549529934}
   - component: {fileID: 5075307049549529935}
   - component: {fileID: 5075307049549529932}
   m_Layer: 0
@@ -67,23 +66,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 8
---- !u!114 &5075307049549529934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075307049549529930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b68975f4a687e489188e743242302e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  transmittionRadius: 10
-  transmitterActive: 0
 --- !u!114 &5075307049549529935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c797c0269302543adccfbf6a4cf5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  transmittionRadius: 15
+  transmitterActive: 0
 --- !u!114 &5075307049549529932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f370a5eedf0d1c43b265e5eb23dc64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boneList: []
   interactionRange: 5
   interactableLayer:
     serializedVersion: 2
