@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7089783860629290027}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7089783861949212716}
   - component: {fileID: 7089783861949212717}
   - component: {fileID: 7089783861949212713}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5050,7 +5050,7 @@ GameObject:
   - component: {fileID: 5284375012076238669}
   - component: {fileID: 186958510556545531}
   - component: {fileID: 4521438659841573700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CampFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

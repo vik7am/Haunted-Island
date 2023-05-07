@@ -15,12 +15,12 @@ namespace HauntedIsland
         }
 
         public override void OnEnterState(){
-            roamRange = stateMachine.roamRange;
+            roamRange = stateMachine.RoamRange;
             stateMachine.navmeshAgent.isStopped = false;
         }
 
         public override void Tick(){
-            if(stateMachine.playerDetected)
+            if(stateMachine.enemy.PlayerDetected)
                 stateMachine.ChangeState(new ChaseState(stateMachine));
             if(destinationFound)
                 CheckDistance();
