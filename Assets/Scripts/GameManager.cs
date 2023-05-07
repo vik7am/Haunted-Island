@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HauntedIsland
@@ -15,40 +12,32 @@ namespace HauntedIsland
             enemiesKilled = 0;
             SpawnManager.Instance.Spawn();
             firstPersonCamera.FollowPlayer(SpawnManager.Instance.GetPlayerTransForm());
-            UIManager.Instance.SetMainMenuVisibility(false);
+            UIManager.Instance.ShowUI(UIType.MAIN_MENU);
         }
 
-        public void ResumeGame(){
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            gamePaused = !gamePaused;
-        }
-
-        public void PauseGame(){
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            gamePaused = !gamePaused;
+        public void ToogleGamePauseState(){
+            if(gamePaused){
+                gamePaused = false;
+                UIManager.Instance.CloseActiveUI();
+            }
+            else{
+                gamePaused = true;
+                UIManager.Instance.ShowUI(UIType.PAUSE_MENU);
+            }
         }
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.P)){
-                if(gamePaused)
-                    ResumeGame();
-                else
-                    PauseGame();
-                UIManager.Instance.SetPauseMenuVisibility(gamePaused);
+                ToogleGamePauseState();
             }
         }
 
         public void GameOver(){
-            PauseGame();
-            UIManager.Instance.SetGameOverMenuVisibility(true);
+            UIManager.Instance.ShowUI(UIType.GAME_OVER_MENU);
         }
 
         public void GameWon(){
-            PauseGame();
-            UIManager.Instance.SetHUDVisibility(false);
-            UIManager.Instance.SetGameWonMenuVisibility(true);
+            UIManager.Instance.ShowUI(UIType.GAME_WON_MENU);
         }
 
         public void EnemyKilled(){
@@ -63,9 +52,7 @@ namespace HauntedIsland
             Time.timeScale = 1;
             firstPersonCamera.DetachCamera();
             SpawnManager.Instance.Despawn();
-            UIManager.Instance.SetGameOverMenuVisibility(false);
-            UIManager.Instance.SetGameWonMenuVisibility(false);
-            UIManager.Instance.SetMainMenuVisibility(true);
+            UIManager.Instance.ShowUI(UIType.MAIN_MENU);
         }
     }
 }

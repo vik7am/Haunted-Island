@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
 
 namespace HauntedIsland
 {
+
+    public enum UIType{
+        MAIN_MENU,
+        HUD_MENU,
+        PAUSE_MENU,
+        GAME_OVER_MENU,
+        GAME_WON_MENU
+    }
+
     public class UIManager : GenericMonoSingleton<UIManager>
     {
         // HUD
@@ -29,14 +35,14 @@ namespace HauntedIsland
         public Button restartButton1;
         public Button exitButton3;
 
-         //GameWonMenu
+        //GameWonMenu
         public GameObject gameWonPanel;
         public Button restartButton2;
         public Button exitButton4;
 
+        private GameObject activeUI;
+
         private void Start() {
-            HUDPanel.SetActive(false);
-            mainMenuPanel.SetActive(true);
             startButton.onClick.AddListener(StartGame);
             resumeButton.onClick.AddListener(ResumeGame);
             restartButton1.onClick.AddListener(RestartGame);
@@ -45,6 +51,7 @@ namespace HauntedIsland
             exitButton2.onClick.AddListener(ExitGame);
             exitButton3.onClick.AddListener(ExitGame);
             exitButton4.onClick.AddListener(ExitGame);
+            ShowUI(UIType.MAIN_MENU);
         }
 
         private void ExitGame(){
@@ -56,32 +63,33 @@ namespace HauntedIsland
         }
 
         private void ResumeGame(){
-            GameManager.Instance.ResumeGame();
-            SetPauseMenuVisibility(false);
+            GameManager.Instance.ToogleGamePauseState();
+            CloseActiveUI();
         }
 
         private void StartGame(){
             GameManager.Instance.StartGame();
         }
 
-        public void SetHUDVisibility(bool status){
-            HUDPanel.SetActive(status);
+        public void ShowUI(UIType uIType){
+            CloseActiveUI();
+            Cursor.lockState = CursorLockMode.None;
+            switch(uIType){
+                case UIType.MAIN_MENU : activeUI = mainMenuPanel; break;
+                case UIType.HUD_MENU : activeUI = HUDPanel; Cursor.lockState = CursorLockMode.Locked; break;
+                case UIType.PAUSE_MENU : activeUI = pauseMenuPanel; Time.timeScale = 0; break;
+                case UIType.GAME_OVER_MENU : activeUI = gameOverPanel; Time.timeScale = 0; break;
+                case UIType.GAME_WON_MENU : activeUI = gameWonPanel; Time.timeScale = 0; break;
+            }
+            activeUI.SetActive(true);
         }
 
-        public void SetMainMenuVisibility(bool status){
-            mainMenuPanel.SetActive(status);
-        }
-
-        public void SetPauseMenuVisibility(bool status){
-            pauseMenuPanel.SetActive(status);
-        }
-
-        public void SetGameOverMenuVisibility(bool status){
-            gameOverPanel.SetActive(status);
-        }
-
-        public void SetGameWonMenuVisibility(bool status){
-            gameWonPanel.SetActive(status);
+        public void CloseActiveUI(){
+            if(activeUI){
+                activeUI.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
+            }
         }
 
         public void SetHUDData(string title, string action){

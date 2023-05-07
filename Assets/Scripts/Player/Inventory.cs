@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace HauntedIsland
     }
     public class Inventory : MonoBehaviour
     {
-        public List<Bone> boneList;
+        public List<Bone> boneList {get; private set;}
         private Collider[] colliders;
         [SerializeField] private float interactionRange;
         [SerializeField] private LayerMask interactableLayer;
@@ -41,11 +40,11 @@ namespace HauntedIsland
                     return;
                 currentInteractable = item;
                 UpdateHUDUI();
-                UIManager.Instance.SetHUDVisibility(true);
+                UIManager.Instance.ShowUI(UIType.HUD_MENU);
             }
             else{
                 currentInteractable = null;
-                UIManager.Instance.SetHUDVisibility(false);
+                UIManager.Instance.CloseActiveUI();
             }
         }
 
