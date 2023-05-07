@@ -4,7 +4,7 @@ namespace HauntedIsland
 {
     public class CampFireProtection : MonoBehaviour
     {
-        Player transmitter;
+        private Player transmitter;
 
         private void OnTriggerEnter(Collider other) {
             UpdateTransmissionState(other, false);

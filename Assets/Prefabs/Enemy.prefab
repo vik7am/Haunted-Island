@@ -83,10 +83,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772ebda1669410c4187a1892eef8e6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <idleDuration>k__BackingField: 3
-  <roamRange>k__BackingField: 30
-  <chaseRange>k__BackingField: 20
-  <attackRange>k__BackingField: 2
+  idleDuration: 2
+  roamRange: 30
+  chaseRange: 20
+  attackRange: 2
 --- !u!114 &1110567183429100448
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,9 +15,9 @@ namespace HauntedIsland
         }
 
         public override void OnEnterState(){
-            playerTransform = stateMachine.enemy.playerTransform;
-            chaseRange = stateMachine.chaseRange;
-            attackRange = stateMachine.attackRange;
+            playerTransform = stateMachine.enemy.PlayerTransform;
+            chaseRange = stateMachine.ChaseRange;
+            attackRange = stateMachine.AttackRange;
             stateMachine.navmeshAgent.isStopped = false;
         }
 

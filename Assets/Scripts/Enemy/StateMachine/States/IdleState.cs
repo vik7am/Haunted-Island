@@ -10,12 +10,12 @@ namespace HauntedIsland
 
         public override void OnEnterState(){
             stateMachine.navmeshAgent.isStopped = true;
-            this.idleDuration = stateMachine.idleDuration;
+            this.idleDuration = stateMachine.IdleDuration;
         }
 
         public override void Tick(){
             idleDuration -= Time.deltaTime;
-            if(stateMachine.enemy.playerDetected){
+            if(stateMachine.enemy.PlayerDetected){
                 stateMachine.ChangeState(new ChaseState(stateMachine));
             }
             else if(idleDuration <= 0){

@@ -4,8 +4,8 @@ namespace HauntedIsland
 {
     public class FirstPersonCamera : MonoBehaviour
     {
-        private Transform playerTransform;
         [SerializeField] private float cameraSensitivity;
+        private Transform playerTransform;
         private float mouseX, mouseY;
         private float xRotation;
         private bool gameRunning;

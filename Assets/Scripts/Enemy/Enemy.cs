@@ -4,8 +4,11 @@ namespace HauntedIsland
 {
     public class Enemy : MonoBehaviour, IDetector
     {
-        public bool playerDetected {get; private set;}
-        public Transform playerTransform {get; private set;}
+        private bool playerDetected;
+        private Transform playerTransform;
+        
+        public bool PlayerDetected {get => playerDetected;}
+        public Transform PlayerTransform {get => playerTransform;}
 
         public void Detect(Transform other){
             playerDetected = true;

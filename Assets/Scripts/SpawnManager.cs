@@ -5,12 +5,12 @@ namespace HauntedIsland
 {
     public class SpawnManager : GenericMonoSingleton<SpawnManager>
     {
-        public Player playerPrefab;
-        public Enemy enemyPrefab;
-        public Bone bonePrefab;
-        public Vector3 playerSpawnPos;
-        public Vector3[] enemiesSpawnPos;
-        public Vector3[] bonesSpawnPos;
+        [SerializeField] private Player playerPrefab;
+        [SerializeField] private Enemy enemyPrefab;
+        [SerializeField] private Bone bonePrefab;
+        [SerializeField] private Vector3 playerSpawnPos;
+        [SerializeField] private Vector3[] enemiesSpawnPos;
+        [SerializeField] private Vector3[] bonesSpawnPos;
         private Player player;
         private List<Enemy> enemyList;
         private List<Bone> boneList;

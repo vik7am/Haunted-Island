@@ -5,13 +5,18 @@ namespace HauntedIsland
 {
     public class EnemyMovementStateMachine : MonoBehaviour
     {
-        [field: SerializeField] public float idleDuration {get; private set;}
-        [field: SerializeField] public float roamRange {get; private set;}
-        [field: SerializeField] public float chaseRange {get; private set;}
-        [field: SerializeField] public float attackRange {get; private set;}
-        public NavMeshAgent navmeshAgent {get; private set;}
+        [SerializeField] private float idleDuration;
+        [SerializeField] private float roamRange;
+        [SerializeField] private float chaseRange;
+        [SerializeField] private float attackRange;
         private BaseState currentState;
+        public NavMeshAgent navmeshAgent {get; private set;}
         public Enemy enemy {get; private set;}
+
+        public float IdleDuration {get => idleDuration;}
+        public float RoamRange {get => roamRange;}
+        public float ChaseRange {get => chaseRange;}
+        public float AttackRange {get => attackRange;}
 
         private void Awake() {
             navmeshAgent = GetComponent<NavMeshAgent>();
@@ -33,7 +38,5 @@ namespace HauntedIsland
             if(currentState != null)
                 currentState.OnEnterState();
         }
-
-        
     }
 }
