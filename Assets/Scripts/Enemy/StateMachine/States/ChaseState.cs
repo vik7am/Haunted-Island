@@ -28,7 +28,7 @@ namespace HauntedIsland
             else
                 stateMachine.ChangeState(new IdleState(stateMachine));
             if(CheckAttackRange())
-                GameManager.Instance.GameOver();
+                stateMachine.enemy.KillPlayer();
                 
         }
 
