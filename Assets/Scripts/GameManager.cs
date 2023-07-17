@@ -7,11 +7,13 @@ namespace HauntedIsland
         [SerializeField] private FirstPersonCamera firstPersonCamera;
         private bool gamePaused;
         private int enemiesKilled;
+        [SerializeField] private Player player;
+        public Player Player => player;
 
         public void StartGame(){
             enemiesKilled = 0;
             SpawnManager.Instance.Spawn();
-            firstPersonCamera.FollowPlayer(SpawnManager.Instance.GetPlayerTransForm());
+            firstPersonCamera.FollowPlayer(SpawnManager.Instance.Player.transform);
             UIManager.Instance.ShowUI(UIType.MAIN_MENU);
         }
 

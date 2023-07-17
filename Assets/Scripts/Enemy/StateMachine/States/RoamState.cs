@@ -20,8 +20,6 @@ namespace HauntedIsland
         }
 
         public override void Tick(){
-            if(stateMachine.enemy.PlayerDetected)
-                stateMachine.ChangeState(new ChaseState(stateMachine));
             if(destinationFound)
                 CheckDistance();
             else
@@ -31,7 +29,7 @@ namespace HauntedIsland
         public void CheckDistance(){
             float distance = Vector3.Distance(stateMachine.transform.position, destination);
             if(distance <= navmeshAgent.stoppingDistance){
-                destinationFound = false;
+                stateMachine.ChangeState(new PatrolState(stateMachine));
             }
         }
 

@@ -72,6 +72,7 @@ namespace HauntedIsland
         }
 
         public void ShowUI(UIType uIType){
+            Debug.Log("UI Typee" + uIType);
             CloseActiveUI();
             Cursor.lockState = CursorLockMode.None;
             switch(uIType){

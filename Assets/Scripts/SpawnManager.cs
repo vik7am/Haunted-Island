@@ -14,6 +14,7 @@ namespace HauntedIsland
         private Player player;
         private List<Enemy> enemyList;
         private List<Bone> boneList;
+        public Player Player => player;
 
         private void Start() {
             enemyList = new List<Enemy>();
@@ -22,7 +23,7 @@ namespace HauntedIsland
 
         public void Spawn() {
             SpawnPlayer();
-            SpawnEnemy();
+            //SpawnEnemy();
         }
 
         public void SpawnPlayer(){

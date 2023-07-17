@@ -15,10 +15,7 @@ namespace HauntedIsland
 
         public override void Tick(){
             idleDuration -= Time.deltaTime;
-            if(stateMachine.enemy.PlayerDetected){
-                stateMachine.ChangeState(new ChaseState(stateMachine));
-            }
-            else if(idleDuration <= 0){
+            if(idleDuration <= 0){
                 stateMachine.ChangeState(new RoamState(stateMachine));
             }
         }

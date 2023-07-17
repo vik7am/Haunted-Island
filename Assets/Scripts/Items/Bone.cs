@@ -5,14 +5,18 @@ namespace HauntedIsland
     public class Bone : MonoBehaviour, IInteractable
     {
         public Enemy enemy {get; private set;}
+        private BoneManager boneManager;
 
         public void SetEnemy(Enemy enemy){
             this.enemy = enemy;
         }
+
+        public void SetBoneManager(BoneManager boneManager){
+            this.boneManager = boneManager;
+        }
         
         public void BurnBone(){
-            enemy.kill();
-            GameManager.Instance.EnemyKilled();
+            boneManager.RemoveBoneFromList(this);
         }
 
         public string GetItemName(){

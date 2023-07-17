@@ -9,9 +9,10 @@ namespace HauntedIsland
         [SerializeField] private float roamRange;
         [SerializeField] private float chaseRange;
         [SerializeField] private float attackRange;
+        [SerializeField] private Enemy enemy;
         private BaseState currentState;
         public NavMeshAgent navmeshAgent {get; private set;}
-        public Enemy enemy {get; private set;}
+        public Enemy Enemy => enemy;
 
         public float IdleDuration {get => idleDuration;}
         public float RoamRange {get => roamRange;}
