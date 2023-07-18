@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f370a5eedf0d1c43b265e5eb23dc64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boneList: []
   interactionRange: 5
   interactableLayer:
     serializedVersion: 2

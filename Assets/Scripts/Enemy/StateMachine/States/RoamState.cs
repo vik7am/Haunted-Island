@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class RoamState : BaseState
     {

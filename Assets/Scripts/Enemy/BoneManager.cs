@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class BoneManager : MonoBehaviour
     {

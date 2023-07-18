@@ -1,4 +1,4 @@
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public abstract class BaseState 
     {

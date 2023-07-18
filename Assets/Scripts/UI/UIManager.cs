@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
 
     public enum UIType{
@@ -52,6 +52,7 @@ namespace HauntedIsland
             exitButton3.onClick.AddListener(ExitGame);
             exitButton4.onClick.AddListener(ExitGame);
             ShowUI(UIType.MAIN_MENU);
+            //mainMenuPanel.SetActive(true);
         }
 
         private void ExitGame(){
@@ -76,7 +77,7 @@ namespace HauntedIsland
             CloseActiveUI();
             Cursor.lockState = CursorLockMode.None;
             switch(uIType){
-                case UIType.MAIN_MENU : activeUI = mainMenuPanel; break;
+                case UIType.MAIN_MENU : activeUI = mainMenuPanel; Time.timeScale = 0; break;
                 case UIType.HUD_MENU : activeUI = HUDPanel; Cursor.lockState = CursorLockMode.Locked; break;
                 case UIType.PAUSE_MENU : activeUI = pauseMenuPanel; Time.timeScale = 0; break;
                 case UIType.GAME_OVER_MENU : activeUI = gameOverPanel; Time.timeScale = 0; break;

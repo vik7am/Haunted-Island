@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class IdleState : BaseState
     {

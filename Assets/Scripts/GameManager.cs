@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class GameManager : GenericMonoSingleton<GameManager>
     {
@@ -12,9 +12,10 @@ namespace HauntedIsland
 
         public void StartGame(){
             enemiesKilled = 0;
-            SpawnManager.Instance.Spawn();
-            firstPersonCamera.FollowPlayer(SpawnManager.Instance.Player.transform);
-            UIManager.Instance.ShowUI(UIType.MAIN_MENU);
+            //SpawnManager.Instance.Spawn();
+            player.gameObject.SetActive(true);
+            firstPersonCamera.FollowPlayer(player.transform);
+            //UIManager.Instance.ShowUI(UIType.MAIN_MENU);
         }
 
         public void ToogleGamePauseState(){

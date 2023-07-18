@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public interface IDetector{
         public void Detect(Transform other);

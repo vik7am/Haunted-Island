@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public interface IInteractable{
         public void Interact(Inventory inventory);

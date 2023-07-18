@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class PlayerMovement : MonoBehaviour
     {
@@ -9,14 +9,18 @@ namespace HauntedIsland
         private float horizontalInput;
         private float verticalInput;
         private Vector3 movementDirection;
+        private bool movementEnabled;
 
         private void Awake() {
             characterController = GetComponent<CharacterController>();
         }
 
         private void Update(){
-            UpdatePlayerMovement();
+            if(movementEnabled)
+                UpdatePlayerMovement();
         }
+
+        public void SetMovementEnabled(bool value) => movementEnabled = value;
 
         private void UpdatePlayerMovement(){
             horizontalInput = Input.GetAxisRaw("Horizontal");

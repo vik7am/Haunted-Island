@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.Old
 {
     public class Enemy : MonoBehaviour, IDetector
     {
@@ -9,8 +9,8 @@ namespace HauntedIsland
         private Transform playerTransform;
         [SerializeField] private BoneManager boneManager;
         
-        public bool PlayerDetected {get => playerDetected;}
-        public Transform PlayerTransform {get => playerTransform;}
+        public bool PlayerDetected => playerDetected;
+        public Transform PlayerTransform => playerTransform;
         public BoneManager BoneManager => boneManager;
 
         private void OnEnable() {
