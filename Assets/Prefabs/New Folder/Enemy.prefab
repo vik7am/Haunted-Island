@@ -106,9 +106,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2372379345436504489}
   - component: {fileID: 2372379345436504488}
-  - component: {fileID: 2372379345436504502}
-  - component: {fileID: 2372379345436504503}
   - component: {fileID: 2372379345436504501}
+  - component: {fileID: 177297275847078445}
+  - component: {fileID: 5193068059247896416}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -147,36 +147,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2372379345436504502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372379345436504490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c178d05cb680a1c489651d2c23404e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneManager: {fileID: 0}
---- !u!114 &2372379345436504503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372379345436504490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772ebda1669410c4187a1892eef8e6b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleDuration: 1
-  roamRange: 1
-  chaseRange: 1
-  attackRange: 1
-  enemy: {fileID: 0}
 --- !u!195 &2372379345436504501
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -199,3 +169,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &177297275847078445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372379345436504490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb1b73d40c95254cacbf5899d349c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5193068059247896416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372379345436504490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef3e29a1ce0fa04eb14ad83ad8f7ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleDuration: 2
+  roamRange: 10
