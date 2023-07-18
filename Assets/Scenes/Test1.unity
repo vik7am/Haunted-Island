@@ -631,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077345441903735238, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8071144521602219444, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
@@ -693,7 +693,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 850e6148bf0659a4fb4be7a3213a7471, type: 2}
+  - {fileID: 2100000, guid: ff11d699ccc799947bd57f362dc014b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -792,23 +792,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5075307049549529930, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5075307049954722380, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 850e6148bf0659a4fb4be7a3213a7471, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
---- !u!114 &1105760957 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5075307049549529935, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
-  m_PrefabInstance: {fileID: 1105760956}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c797c0269302543adccfbf6a4cf5e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1324576401
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227c87728ed070d43a35303e370dd13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSensitivity: 10
+  cameraSensitivity: 150
+  playerTransform: {fileID: 2043063174}
 --- !u!1001 &1768832105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1009,6 +999,10 @@ PrefabInstance:
     - target: {fileID: 5071274592585694562, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5071274592585694562, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5071274592585694563, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
       propertyPath: m_RootOrder
@@ -1057,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 5071274592585694564, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1105760957}
+      objectReference: {fileID: 0}
     - target: {fileID: 5071274592585694564, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
       propertyPath: firstPersonCamera
       value: 
@@ -1142,6 +1136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801f719655f5c204c93c419eb0b4a0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2043063174 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5075307049549529928, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
+  m_PrefabInstance: {fileID: 1105760956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2372379343580507143
 PrefabInstance:
   m_ObjectHideFlags: 0

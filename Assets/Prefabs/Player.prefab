@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5075307049549529928}
   - component: {fileID: 5075307049549529931}
-  - component: {fileID: 5075307049549529929}
-  - component: {fileID: 5075307049549529935}
-  - component: {fileID: 5075307049549529932}
+  - component: {fileID: 6065020600404826593}
+  - component: {fileID: 5004953226564165370}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -53,7 +52,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5075307049549529929
+--- !u!114 &6065020600404826593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,11 +61,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5075307049549529930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0f976bbde11074ebccae30cd549e82, type: 3}
+  m_Script: {fileID: 11500000, guid: 6498e96e50153044c9554d2db19de5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
---- !u!114 &5075307049549529935
+  movementSpeed: 10
+--- !u!114 &5004953226564165370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,30 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5075307049549529930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c797c0269302543adccfbf6a4cf5e1, type: 3}
+  m_Script: {fileID: 11500000, guid: dd8c26c8d31069049a6217fc72abf5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  transmittionRadius: 15
-  transmitterActive: 0
---- !u!114 &5075307049549529932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075307049549529930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f370a5eedf0d1c43b265e5eb23dc64a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionRange: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &5075307049954722382
 GameObject:
   m_ObjectHideFlags: 0

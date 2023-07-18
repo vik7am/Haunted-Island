@@ -5,7 +5,7 @@ namespace HauntedIsland.Old
     public class FirstPersonCamera : MonoBehaviour
     {
         [SerializeField] private float cameraSensitivity;
-        private Transform playerTransform;
+        [SerializeField] private Transform playerTransform;
         private float mouseX, mouseY;
         private float xRotation;
         private bool gameRunning;
@@ -15,6 +15,7 @@ namespace HauntedIsland.Old
         private void Start() {
             orignalPosition = transform.position;
             originalRotation = transform.rotation;
+            FollowPlayer(playerTransform);
         }
 
         public void DetachCamera(){
@@ -36,8 +37,14 @@ namespace HauntedIsland.Old
         void Update(){
             if(!gameRunning)
                 return;
-            UpdatateCameraRotation();
+            //UpdatateCameraRotation();
             UpdatePlayerRotation();
+        }
+
+        private void LateUpdate() {
+            if(!gameRunning)
+                return;
+            UpdatateCameraRotation();
         }
     
         private void UpdatateCameraRotation(){
