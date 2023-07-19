@@ -34,17 +34,12 @@ namespace HauntedIsland.Old
             Cursor.lockState = CursorLockMode.Locked;
         }
     
-        void Update(){
+        void LateUpdate(){
             if(!gameRunning)
                 return;
-            //UpdatateCameraRotation();
             UpdatePlayerRotation();
-        }
-
-        private void LateUpdate() {
-            if(!gameRunning)
-                return;
             UpdatateCameraRotation();
+            
         }
     
         private void UpdatateCameraRotation(){

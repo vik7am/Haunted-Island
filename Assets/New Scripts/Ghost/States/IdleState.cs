@@ -16,15 +16,14 @@ namespace HauntedIsland.Ghost
             idleDurationLeft = ghostStateMachine.IdleDuration;
         }
 
-        public override void Update()
-        {
+        public override void Update(){
             idleDurationLeft -= Time.deltaTime;
             if(idleDurationLeft <= 0)
-                ghostStateMachine.ChangeState(ghostStateMachine.PatrolState);
+                ghostStateMachine.ChangeState(ghostStateMachine.RoamState);
         }
 
-        public override void OnExitState(){
-            ghostStateMachine.NavMeshAgent.isStopped = false;
+        public override void OnExitState()
+        {
             idleDurationLeft = 0;
         }
     }

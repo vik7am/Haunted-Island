@@ -29,9 +29,9 @@ namespace HauntedIsland.Ghost
             }
         }
 
-        public Vector3 GetNextBonePosition(){
+        public Transform GetNextBoneTransform(){
             currentBoneIndex = (currentBoneIndex + 1) % boneCount;
-            return boneList[currentBoneIndex].transform.position;
+            return boneList[currentBoneIndex].transform;
         }
 
         public void RemoveBoneFromList(Bone bone){

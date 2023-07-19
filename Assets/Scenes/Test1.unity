@@ -754,10 +754,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5075307049954722380, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 850e6148bf0659a4fb4be7a3213a7471, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
 --- !u!1 &1324576401
@@ -1157,7 +1153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2372379345436504501, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2372379345436504502, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
       propertyPath: boneManager
