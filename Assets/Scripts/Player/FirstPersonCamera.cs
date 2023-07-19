@@ -1,3 +1,5 @@
+using System;
+using HauntedIsland.Player;
 using UnityEngine;
 
 namespace HauntedIsland.Old
@@ -8,9 +10,17 @@ namespace HauntedIsland.Old
         [SerializeField] private Transform playerTransform;
         private float mouseX, mouseY;
         private float xRotation;
-        private bool gameRunning;
+        private bool cameraDisabled;
         private Vector3 orignalPosition;
         private Quaternion originalRotation;
+
+        private void OnEnable() {
+            PlayerController.onPlayerKilled += DisableCameraMovement;
+        }
+
+        private void DisableCameraMovement(){
+            cameraDisabled = true;
+        }
 
         private void Start() {
             orignalPosition = transform.position;
@@ -22,11 +32,11 @@ namespace HauntedIsland.Old
             transform.SetParent(null);
             transform.position = orignalPosition;
             transform.rotation = originalRotation;
-            gameRunning = false;
+            //gameRunning = false;
         }
     
         public void FollowPlayer(Transform playerTransform){
-            gameRunning = true;
+            //gameRunning = true;
             this.playerTransform = playerTransform;
             transform.SetParent(playerTransform);
             transform.localPosition = new Vector3(0, 1, 0);
@@ -35,8 +45,7 @@ namespace HauntedIsland.Old
         }
     
         void LateUpdate(){
-            if(!gameRunning)
-                return;
+            if(cameraDisabled) return;
             UpdatePlayerRotation();
             UpdatateCameraRotation();
             

@@ -16,8 +16,7 @@ namespace HauntedIsland.Ghost
 
         public override void OnEnterState(){
             bone = ghostStateMachine.GhostController.BoneManager.GetNextBone();
-            if(bone)
-                bone.onBoneDestroyed += OnBoneDestroyed;
+            bone.onBoneDestroyed += OnBoneDestroyed;
             destination = bone.transform.position;
             ghostStateMachine.NavMeshAgent.SetDestination(destination);
             ghostStateMachine.NavMeshAgent.isStopped = false;

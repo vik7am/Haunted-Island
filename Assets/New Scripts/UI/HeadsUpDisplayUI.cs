@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HauntedIsland
+namespace HauntedIsland.UI
 {
     public class HeadsUpDisplayUI : MonoBehaviour
     {

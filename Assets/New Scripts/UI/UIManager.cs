@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using HauntedIsland.Ghost;
+using HauntedIsland.Player;
 using UnityEngine;
 
 namespace HauntedIsland.UI
@@ -22,7 +25,32 @@ namespace HauntedIsland.UI
             AddUIPanelsToDictionary();
         }
 
+        private void OnEnable() {
+            GhostController.onGhostKilled += SwitchToGameWonUI;
+            PlayerController.onPlayerKilled += SwitchToGameOverUI;
+        }
+
+        private void onDisable() {
+            GhostController.onGhostKilled -= SwitchToGameWonUI;
+            PlayerController.onPlayerKilled -= SwitchToGameOverUI;
+        }
+
+        private void SwitchToGameWonUI(){
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SwitchUI(UIPanelID.GAME_WON);
+        }
+
+        private void SwitchToGameOverUI(){
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SwitchUI(UIPanelID.GAME_OVER);
+        }
+
         private void Start() {
+            Time.timeScale = 1;
             SwitchUI(UIPanelID.HEADS_UP_DISPLAY);
         }
 

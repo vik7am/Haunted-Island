@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HauntedIsland.Manager;
 
-namespace HauntedIsland
+namespace HauntedIsland.UI
 {
     public class GameOverUI : MonoBehaviour
     {
@@ -16,6 +17,7 @@ namespace HauntedIsland
         }
 
         private void RestartGame(){
+            GameManager.Instance.RestartGame();
             Debug.Log("Restart Game");
         }
 
