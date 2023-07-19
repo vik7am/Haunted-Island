@@ -7,21 +7,28 @@ namespace HauntedIsland.Ghost
 {
     public class PatrolState : GhostState
     {
-        private Transform boneTransform;
+        private Bone bone;
         private Vector3 destination;
+
         public PatrolState(GhostStateMachine ghostStateMachine) : base(ghostStateMachine)
         {
         }
 
         public override void OnEnterState(){
-            boneTransform = ghostStateMachine.GhostController.BoneManager.GetNextBoneTransform();
-            destination = boneTransform.position;
+            bone = ghostStateMachine.GhostController.BoneManager.GetNextBone();
+            if(bone)
+                bone.onBoneDestroyed += OnBoneDestroyed;
+            destination = bone.transform.position;
             ghostStateMachine.NavMeshAgent.SetDestination(destination);
             ghostStateMachine.NavMeshAgent.isStopped = false;
         }
 
+        private void OnBoneDestroyed(Bone bone){
+            this.bone = ghostStateMachine.GhostController.BoneManager.GetNextBone();
+        }
+
         public override void Update(){
-            destination = boneTransform.position;
+            destination = bone.transform.position;
             ghostStateMachine.NavMeshAgent.SetDestination(destination);
             CheckDestination();
         }

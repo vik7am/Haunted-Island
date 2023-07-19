@@ -20,6 +20,8 @@ namespace HauntedIsland.Player
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && collectable != null){
                 inventory.AddCollectable(collectable);
+                collectable = null;
+                onNearCollectable?.Invoke(null);
             }
         }
 
@@ -27,6 +29,7 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<ICollectable>(out ICollectable collectable)){
                 this.collectable = collectable;
                 onNearCollectable?.Invoke(collectable);
+                //Debug.Log("entered collectable range");
             }
         }
 
@@ -34,6 +37,7 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<ICollectable>(out ICollectable collectable)){
                 this.collectable = null;
                 onNearCollectable?.Invoke(null);
+                //Debug.Log("left collectable range");
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,11 @@ namespace HauntedIsland.Ghost
         private int boneCount;
 
         public int BoneCount => boneCount;
-
-        public static event System.Action onBoneDestroyed;
+        public event Action onAllBonesDestroyed;
 
         private void Awake() {
             InitializeBoneList();
-            currentBoneIndex = 0;
+            currentBoneIndex = boneCount-1;
         }
 
         private void InitializeBoneList(){
@@ -25,18 +25,24 @@ namespace HauntedIsland.Ghost
             for(int i=0; i<boneCount; i++){
                 if(transform.GetChild(i).TryGetComponent<Bone>(out Bone bone)){
                     boneList.Add(bone);
+                    bone.onBoneDestroyed += RemoveBoneFromList;
                 }
             }
         }
 
-        public Transform GetNextBoneTransform(){
+        public Bone GetNextBone(){
+            if(boneCount == 0)
+                return null;
             currentBoneIndex = (currentBoneIndex + 1) % boneCount;
-            return boneList[currentBoneIndex].transform;
+            return boneList[currentBoneIndex];
         }
 
         public void RemoveBoneFromList(Bone bone){
+            boneCount--;
             boneList.Remove(bone);
-            onBoneDestroyed?.Invoke();
+            if(boneCount == 0){
+                onAllBonesDestroyed?.Invoke();
+            }
         }
     }
 }

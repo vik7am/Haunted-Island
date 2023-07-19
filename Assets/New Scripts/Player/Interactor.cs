@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using HauntedIsland.Core;
+using HauntedIsland.Interactable;
 
 namespace HauntedIsland.Player
 {
@@ -18,11 +19,12 @@ namespace HauntedIsland.Player
 
         private void Awake() {
             player = GetComponent<PlayerController>();
+            inventory = GetComponent<Inventory>();
         }
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && interactable != null){
-                ICollectable collectable = inventory.GetCollectable();
+                //ICollectable collectable = inventory.GetCollectable();
                 interactable.Interact(player);
             }
         }
@@ -31,6 +33,7 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<IInteractable>(out IInteractable interactable)){
                 this.interactable = interactable;
                 onNearInteractable?.Invoke(interactable);
+                Debug.Log("entered interactable range");
             }
         }
 
@@ -38,6 +41,7 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<IInteractable>(out IInteractable interactable)){
                 this.interactable = null;
                 onNearInteractable?.Invoke(null);
+                Debug.Log("left interactable range");
             }
         }
     }

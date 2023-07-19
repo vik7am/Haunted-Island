@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HauntedIsland.Core;
+using System;
 
 namespace HauntedIsland.Ghost
 {
@@ -11,14 +12,12 @@ namespace HauntedIsland.Ghost
         private BoxCollider boxCollider;
         private Rigidbody _rigidbody;
 
+        public event Action<Bone> onBoneDestroyed;
+
         private void Awake(){
             boneManager = transform.parent.GetComponent<BoneManager>();
             boxCollider = GetComponent<BoxCollider>();
             _rigidbody = GetComponent<Rigidbody>();
-        }
-        
-        public void BurnBone(){
-            boneManager.RemoveBoneFromList(this);
         }
 
         public string GetItemName(){
@@ -26,6 +25,7 @@ namespace HauntedIsland.Ghost
         }
 
         public void Collect(Transform playerTransform){
+            Debug.Log("collect called");
             transform.SetParent(playerTransform);
             transform.localPosition = Vector3.zero;
             boxCollider.enabled = false;
@@ -41,6 +41,11 @@ namespace HauntedIsland.Ghost
             _rigidbody.useGravity = true;
             transform.GetChild(0).gameObject.SetActive(true);
             Debug.Log("bone dropped");
+        }
+
+        public void Destroy(){
+            onBoneDestroyed?.Invoke(this);
+            Destroy(gameObject);
         }
 
         // public string GetActionInfo(Inventory inventory){
