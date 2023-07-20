@@ -10,7 +10,7 @@ namespace HauntedIsland.UI
     public enum UIPanelID{HEADS_UP_DISPLAY, GAME_WON, GAME_OVER}
 
     [System.Serializable]
-    public struct UIPanels{
+    public class UIPanels{
         public UIPanelID id;
         public GameObject panel;
     }
@@ -30,7 +30,7 @@ namespace HauntedIsland.UI
             PlayerController.onPlayerKilled += SwitchToGameOverUI;
         }
 
-        private void onDisable() {
+        private void OnDisable() {
             GhostController.onGhostKilled -= SwitchToGameWonUI;
             PlayerController.onPlayerKilled -= SwitchToGameOverUI;
         }
@@ -51,6 +51,8 @@ namespace HauntedIsland.UI
 
         private void Start() {
             Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             SwitchUI(UIPanelID.HEADS_UP_DISPLAY);
         }
 

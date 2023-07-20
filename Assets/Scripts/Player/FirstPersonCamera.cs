@@ -18,6 +18,10 @@ namespace HauntedIsland.Old
             PlayerController.onPlayerKilled += DisableCameraMovement;
         }
 
+        private void OnDisable() {
+            PlayerController.onPlayerKilled -= DisableCameraMovement;
+        }
+
         private void DisableCameraMovement(){
             cameraDisabled = true;
         }

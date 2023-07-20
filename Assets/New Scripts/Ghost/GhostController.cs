@@ -22,13 +22,21 @@ namespace HauntedIsland.Ghost
             boneManager.onAllBonesDestroyed += KillGhost;
         }
 
+        private void OnDisable() {
+            boneManager.onAllBonesDestroyed -= KillGhost;
+        }
+
         private void KillGhost(){
-            Debug.Log("Ghost Killed");
             ghostStateMachine.ChangeState(ghostStateMachine.IdleState);
             ghostStateMachine.enabled = false;
             onGhostKilled?.Invoke();
         }
 
+        private void OnTriggerEnter(Collider other) {
+            if(other.TryGetComponent<PlayerController>(out PlayerController player)){
+                player.KillPlayer();
+            }
+        }
         
     }
 }

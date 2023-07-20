@@ -11,7 +11,7 @@ namespace HauntedIsland.Manager
     public class GameManager : GenericMonoSingleton<GameManager>
     {
         public void RestartGame(){
-            SceneManager.LoadScene((int)Level.GAME_WORLD);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

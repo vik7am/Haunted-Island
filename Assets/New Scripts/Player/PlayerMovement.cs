@@ -34,7 +34,10 @@ namespace HauntedIsland.Player
 
         private void UpdatePlayerMovement(){
             movementDirection = transform.forward*movementInput.z + transform.right*movementInput.x;
-            characterController.SimpleMove(movementDirection.normalized * movementSpeed);
+            //Debug.Log("character controller : " + characterController);
+            //Debug.Log("movement direction : " + movementDirection);
+            if(characterController)
+                characterController.SimpleMove(movementDirection.normalized * movementSpeed);
         }
 
         public bool IsIdle => movementDirection == Vector3.zero;

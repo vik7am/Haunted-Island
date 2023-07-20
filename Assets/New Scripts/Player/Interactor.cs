@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using HauntedIsland.Core;
 using HauntedIsland.Interactable;
 
 namespace HauntedIsland.Player
@@ -24,7 +23,6 @@ namespace HauntedIsland.Player
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && interactable != null){
-                //ICollectable collectable = inventory.GetCollectable();
                 interactable.Interact(player);
             }
         }

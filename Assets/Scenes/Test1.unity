@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1505691603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 227c87728ed070d43a35303e370dd13b, type: 3}
+  m_Script: {fileID: 11500000, guid: dab2c41d51fa41e47a29218cdd7f15ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSensitivity: 150
@@ -1108,7 +1108,7 @@ PrefabInstance:
     - target: {fileID: 5071274592585694564, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
       propertyPath: firstPersonCamera
       value: 
-      objectReference: {fileID: 1505691607}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95d937c9fed26354193dc11b71f77083, type: 3}
 --- !u!1 &1926252809
@@ -1252,10 +1252,6 @@ PrefabInstance:
       propertyPath: boneManager
       value: 
       objectReference: {fileID: 785886406}
-    - target: {fileID: 2372379345436504488, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2372379345436504489, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1303,14 +1299,6 @@ PrefabInstance:
     - target: {fileID: 2372379345436504490, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
       propertyPath: m_Name
       value: Ghost
-      objectReference: {fileID: 0}
-    - target: {fileID: 2372379345436504501, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2372379345436504502, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}
-      propertyPath: boneManager
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d55863b4ffd238f478dd9e9a526fc2bf, type: 3}

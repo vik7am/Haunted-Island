@@ -24,20 +24,12 @@ namespace HauntedIsland.Player
             onPlayerKilled?.Invoke();
         }
 
-        // private void OnCollisionEnter(Collision other) {
-        //     Debug.Log("collision");
-        //     if(other.gameObject.GetComponent<GhostController>()){
+        // private void OnControllerColliderHit(ControllerColliderHit hit){
+        //     Transform enemyTransform = hit.transform.parent;
+        //     if(enemyTransform && enemyTransform.GetComponent<GhostController>()){
         //         KillPlayer();
         //     }
         // }
-
-        private void OnControllerColliderHit(ControllerColliderHit hit){
-            Transform enemyTransform = hit.transform.parent;
-            if(enemyTransform && enemyTransform.GetComponent<GhostController>()){
-                Debug.Log("collision");
-                KillPlayer();
-            }
-        }
     
     }
 }

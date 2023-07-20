@@ -18,11 +18,11 @@ namespace HauntedIsland.UI
 
         private void RestartGame(){
             GameManager.Instance.RestartGame();
-            Debug.Log("Restart Game");
+            //Debug.Log("Restart Game");
         }
 
         private void ExitGame(){
-            Debug.Log("Exit Game");
+            //Debug.Log("Exit Game");
         }
     }
 }
