@@ -11,7 +11,7 @@ namespace HauntedIsland.Player
         private ICollectable collectable;
         private Inventory inventory;
 
-        public event Action<ICollectable> onNearCollectable;
+        public static event Action<ICollectable> onNearCollectable;
 
         private void Awake() {
             inventory = GetComponent<Inventory>();
@@ -29,7 +29,6 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<ICollectable>(out ICollectable collectable)){
                 this.collectable = collectable;
                 onNearCollectable?.Invoke(collectable);
-                //Debug.Log("entered collectable range");
             }
         }
 
@@ -37,7 +36,6 @@ namespace HauntedIsland.Player
             if(other.TryGetComponent<ICollectable>(out ICollectable collectable)){
                 this.collectable = null;
                 onNearCollectable?.Invoke(null);
-                //Debug.Log("left collectable range");
             }
         }
     }

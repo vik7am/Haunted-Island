@@ -9,6 +9,8 @@ namespace HauntedIsland.Player
     {
         private ICollectable _collectable;
 
+        public string CollectableName => _collectable.GetName();
+
         private void Update() {
             if(Input.GetKeyDown(KeyCode.F) && _collectable != null){
                 DropCollectable();

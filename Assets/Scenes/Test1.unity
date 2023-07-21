@@ -279,6 +279,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3582100939786593288, guid: d1481c8995e31bc4dbfd8ef097b6a455, type: 3}
   m_PrefabInstance: {fileID: 384426241}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &637023715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071144521332755721, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+  m_PrefabInstance: {fileID: 794963027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670490531
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +501,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6638999141916391088, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+      propertyPath: interactionPanel
+      value: 
+      objectReference: {fileID: 1583895300}
+    - target: {fileID: 6638999141916391088, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+      propertyPath: interactableNameUI
+      value: 
+      objectReference: {fileID: 637023715}
+    - target: {fileID: 6638999141916391088, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+      propertyPath: interactableActionUI
+      value: 
+      objectReference: {fileID: 1207842347}
     - target: {fileID: 7746733784467899825, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
       propertyPath: uiPanelList.Array.data[0].panel
       value: 
@@ -789,7 +812,7 @@ Transform:
   m_GameObject: {fileID: 831835819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -851,6 +874,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
+--- !u!114 &1207842347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8071144520826534998, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+  m_PrefabInstance: {fileID: 794963027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1324576401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1076,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSensitivity: 150
   playerTransform: {fileID: 2043063174}
+--- !u!1 &1583895300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8071144520534962121, guid: c27d1bc577b5ead4e91b26360eb79a10, type: 3}
+  m_PrefabInstance: {fileID: 794963027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1768832105
 PrefabInstance:
   m_ObjectHideFlags: 0

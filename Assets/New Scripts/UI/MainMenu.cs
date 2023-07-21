@@ -1,27 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using HauntedIsland.Manager;
 using UnityEngine;
 using UnityEngine.UI;
-using HauntedIsland.Manager;
 
 namespace HauntedIsland.UI
 {
-    public class GameOverUI : MonoBehaviour
+    public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private Button restartButton;
+        [SerializeField] private Button startButton;
         [SerializeField] private Button exitButton;
 
         private void Awake() {
-            restartButton.onClick.AddListener(RestartGame);
+            startButton.onClick.AddListener(StartGame);
             exitButton.onClick.AddListener(ExitGame);
         }
 
-        private void RestartGame(){
-            GameManager.Instance.RestartGame();
+        private void StartGame(){
+            GameManager.Instance.StartGame();
         }
 
         private void ExitGame(){
-            GameManager.Instance.ExitToMainMenu();
+            GameManager.Instance.ExitGame();
         }
     }
 }

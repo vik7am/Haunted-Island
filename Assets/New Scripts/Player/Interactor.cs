@@ -14,7 +14,7 @@ namespace HauntedIsland.Player
 
         public Inventory Inventory => inventory;
 
-        public event Action<IInteractable> onNearInteractable;
+        public static event Action<Inventory, IInteractable> onNearInteractable;
 
         private void Awake() {
             player = GetComponent<PlayerController>();
@@ -24,22 +24,21 @@ namespace HauntedIsland.Player
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && interactable != null){
                 interactable.Interact(player);
+                onNearInteractable?.Invoke(inventory, interactable);
             }
         }
 
         private void OnTriggerEnter(Collider other) {
             if(other.TryGetComponent<IInteractable>(out IInteractable interactable)){
                 this.interactable = interactable;
-                onNearInteractable?.Invoke(interactable);
-                Debug.Log("entered interactable range");
+                onNearInteractable?.Invoke(inventory, interactable);
             }
         }
 
         private void OnTriggerExit(Collider other) {
             if(other.TryGetComponent<IInteractable>(out IInteractable interactable)){
                 this.interactable = null;
-                onNearInteractable?.Invoke(null);
-                Debug.Log("left interactable range");
+                onNearInteractable?.Invoke(inventory, null);
             }
         }
     }
