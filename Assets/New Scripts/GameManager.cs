@@ -10,6 +10,7 @@ namespace HauntedIsland.Manager
 
     public class GameManager : GenericMonoSingleton<GameManager>
     {
+
         public void RestartGame(){
             StartGame();
         }

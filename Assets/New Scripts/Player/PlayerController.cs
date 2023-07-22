@@ -11,12 +11,28 @@ namespace HauntedIsland.Player
         private PlayerMovement playerMovement;
         private Inventory inventory;
         public Inventory Inventory => inventory;
+        [SerializeField] private LayerMask ghostLayer;
+        [SerializeField] private Light spotLight;
 
         public static event Action onPlayerKilled;
+        public static event Action<bool> onNearGhost;
+        private bool isGhostNearby;
 
         private void Awake() {
             playerMovement = GetComponent<PlayerMovement>();
             inventory = GetComponent<Inventory>();
+        }
+
+        private void OnEnable() {
+            LightManager.onEnableDarkMode += OnEnableDarkMode;
+        }
+
+        private void OnDisable() {
+            LightManager.onEnableDarkMode -= OnEnableDarkMode;
+        }
+
+        private void OnEnableDarkMode(bool status){
+            spotLight.enabled = status;
         }
 
         public void KillPlayer(){
@@ -24,12 +40,23 @@ namespace HauntedIsland.Player
             onPlayerKilled?.Invoke();
         }
 
-        // private void OnControllerColliderHit(ControllerColliderHit hit){
-        //     Transform enemyTransform = hit.transform.parent;
-        //     if(enemyTransform && enemyTransform.GetComponent<GhostController>()){
-        //         KillPlayer();
-        //     }
-        // }
-    
+        private void Update() {
+            CheckForGhost();
+        }
+
+        private void CheckForGhost(){
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 7.0f, ghostLayer, QueryTriggerInteraction.Collide);
+            foreach(Collider collider in colliders){
+                if(collider.GetComponent<GhostController>()){
+                    isGhostNearby = true;
+                    onNearGhost?.Invoke(true);
+                    return;
+                }
+            }
+            if(isGhostNearby){
+                isGhostNearby = false;
+                onNearGhost?.Invoke(false);
+            }
+        }
     }
 }

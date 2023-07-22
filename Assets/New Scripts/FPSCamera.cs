@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,13 +14,27 @@ namespace HauntedIsland.Player
         private bool cameraDisabled;
         private Vector3 orignalPosition;
         private Quaternion originalRotation;
+        private Camera _camera;
+        private Color skyColor;
+
+        private void Awake() {
+            _camera = GetComponent<Camera>();
+            skyColor = new Color(0.4581257f, 0.5297253f, 0.6698113f, 0);
+        }
 
         private void OnEnable() {
             PlayerController.onPlayerKilled += DisableCameraMovement;
+            LightManager.onEnableDarkMode += OnEnabledarkMode;
         }
 
         private void OnDisable() {
             PlayerController.onPlayerKilled -= DisableCameraMovement;
+            LightManager.onEnableDarkMode -= OnEnabledarkMode;
+        }
+
+        private void OnEnabledarkMode(bool status){
+            Color color = (status)? Color.black: skyColor;
+            _camera.backgroundColor = color;
         }
 
         private void DisableCameraMovement(){
@@ -30,6 +45,10 @@ namespace HauntedIsland.Player
             orignalPosition = transform.position;
             originalRotation = transform.rotation;
             FollowPlayer(playerTransform);
+        }
+
+        public void ChangeBackgroundColor(){
+            _camera.backgroundColor = Color.black;
         }
     
         public void FollowPlayer(Transform playerTransform){
