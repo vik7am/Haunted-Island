@@ -7,6 +7,7 @@ namespace HauntedIsland.Ghost
     public class GhostController : MonoBehaviour
     {
         [SerializeField] private BoneManager boneManager;
+        [SerializeField] private MeshRenderer ghostMeshRenderer;
         private GhostStateMachine ghostStateMachine;
 
         public BoneManager BoneManager => boneManager;
@@ -14,14 +15,21 @@ namespace HauntedIsland.Ghost
 
         private void Awake() {
             ghostStateMachine = GetComponent<GhostStateMachine>();
+            ShowGhostBody(false);
         }
         
         private void OnEnable() {
             boneManager.onAllBonesDestroyed += KillGhost;
+            LightManager.onEnableDarkMode += ShowGhostBody;
         }
 
         private void OnDisable() {
             boneManager.onAllBonesDestroyed -= KillGhost;
+            LightManager.onEnableDarkMode -= ShowGhostBody;
+        }
+
+        private void ShowGhostBody(bool statue){
+            ghostMeshRenderer.enabled = statue;
         }
 
         private void KillGhost(){
