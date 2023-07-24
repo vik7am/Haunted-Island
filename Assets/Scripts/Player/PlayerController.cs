@@ -8,6 +8,7 @@ namespace HauntedIsland.Player
     {
         [SerializeField] private Light spotLight;
         [SerializeField] private LayerMask ghostLayer;
+        [SerializeField] private float ghostRange;
         private PlayerMovement playerMovement;
         private Inventory inventory;
         private bool isGhostNearby;
@@ -44,7 +45,7 @@ namespace HauntedIsland.Player
         }
 
         private void CheckForGhost(){
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 7.0f, ghostLayer, QueryTriggerInteraction.Collide);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, ghostRange, ghostLayer, QueryTriggerInteraction.Collide);
             foreach(Collider collider in colliders){
                 if(collider.GetComponent<GhostController>()){
                     isGhostNearby = true;

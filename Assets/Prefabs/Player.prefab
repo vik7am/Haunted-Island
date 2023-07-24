@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6065020600404826593}
   - component: {fileID: 2387929374498903251}
   - component: {fileID: 9221682899779024335}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,10 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8c26c8d31069049a6217fc72abf5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spotLight: {fileID: 0}
   ghostLayer:
     serializedVersion: 2
-    m_Bits: 0
-  spotLight: {fileID: 0}
+    m_Bits: 64
+  ghostRange: 12
 --- !u!114 &6065020600404826593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6498e96e50153044c9554d2db19de5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 5
 --- !u!114 &2387929374498903251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ GameObject:
   - component: {fileID: 5075307049954722418}
   - component: {fileID: 5075307049954722381}
   - component: {fileID: 5075307049954722380}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 850e6148bf0659a4fb4be7a3213a7471, type: 2}
+  - {fileID: 2100000, guid: ff11d699ccc799947bd57f362dc014b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
