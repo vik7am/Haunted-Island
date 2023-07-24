@@ -1,13 +1,12 @@
 using UnityEngine;
 
-namespace HauntedIsland.Old
+namespace HauntedIsland.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float movementSpeed;
         private CharacterController characterController;
-        private float horizontalInput;
-        private float verticalInput;
+        private Vector3 movementInput;
         private Vector3 movementDirection;
         private bool movementEnabled;
 
@@ -15,23 +14,29 @@ namespace HauntedIsland.Old
             characterController = GetComponent<CharacterController>();
         }
 
-        private void Update(){
-            if(movementEnabled)
-                UpdatePlayerMovement();
+        private void Start() {
+            movementEnabled = true;
         }
 
-        public void SetMovementEnabled(bool value) => movementEnabled = value;
+        private void Update(){
+            if(!movementEnabled) return;
+            GetPlayerMovementInput();
+            UpdatePlayerMovement();
+        }
+
+        private void GetPlayerMovementInput(){
+            movementInput.x = Input.GetAxisRaw("Horizontal");
+            movementInput.z = Input.GetAxisRaw("Vertical");
+        }
 
         private void UpdatePlayerMovement(){
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
-            movementDirection = transform.forward*verticalInput + transform.right*horizontalInput;
-            movementDirection = movementDirection.normalized;
-            characterController.SimpleMove(movementDirection * movementSpeed);
+            movementDirection = transform.forward*movementInput.z + transform.right*movementInput.x;
+            if(characterController)
+                characterController.SimpleMove(movementDirection.normalized * movementSpeed);
         }
 
-        public bool IsIdle(){
-            return movementDirection == Vector3.zero;
-        }
+        public bool IsIdle => movementDirection == Vector3.zero;
+
+        public void SetMovementEnabled(bool value) => movementEnabled = value;
     }
 }

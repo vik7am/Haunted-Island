@@ -1,102 +1,74 @@
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using HauntedIsland.Ghost;
+using HauntedIsland.Player;
 
-namespace HauntedIsland.Old
+
+namespace HauntedIsland.UI
 {
+    public enum UIPanelID{HEADS_UP_DISPLAY, GAME_WON, GAME_OVER}
 
-    public enum UIType{
-        MAIN_MENU,
-        HUD_MENU,
-        PAUSE_MENU,
-        GAME_OVER_MENU,
-        GAME_WON_MENU
+    [System.Serializable]
+    public class UIPanels{
+        public UIPanelID id;
+        public GameObject panel;
     }
 
-    public class UIManager : GenericMonoSingleton<UIManager>
+    public class UIManager : MonoBehaviour
     {
-        // HUD
-        public GameObject HUDPanel;
-        public TextMeshProUGUI titleGUI;
-        public TextMeshProUGUI actionGUI;
-        
-        //MainMenu
-        public GameObject mainMenuPanel;
-        public Button startButton;
-        public Button exitButton1;
+        [SerializeField] private List<UIPanels> uiPanelList;
+        private Dictionary<UIPanelID, GameObject> uiPanelDictionary;
+        private GameObject activeUIPanel;
 
-        //PauseMenu
-        public GameObject pauseMenuPanel;
-        public Button resumeButton;
-        public Button exitButton2;
+        private void Awake() {
+            AddUIPanelsToDictionary();
+        }
 
-        //GameOverMenu
-        public GameObject gameOverPanel;
-        public Button restartButton1;
-        public Button exitButton3;
+        private void OnEnable() {
+            GhostController.onGhostKilled += SwitchToGameWonUI;
+            PlayerController.onPlayerKilled += SwitchToGameOverUI;
+        }
 
-        //GameWonMenu
-        public GameObject gameWonPanel;
-        public Button restartButton2;
-        public Button exitButton4;
+        private void OnDisable() {
+            GhostController.onGhostKilled -= SwitchToGameWonUI;
+            PlayerController.onPlayerKilled -= SwitchToGameOverUI;
+        }
 
-        private GameObject activeUI;
+        private void SwitchToGameWonUI(){
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SwitchUI(UIPanelID.GAME_WON);
+        }
+
+        private void SwitchToGameOverUI(){
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SwitchUI(UIPanelID.GAME_OVER);
+        }
 
         private void Start() {
-            startButton.onClick.AddListener(StartGame);
-            resumeButton.onClick.AddListener(ResumeGame);
-            restartButton1.onClick.AddListener(RestartGame);
-            restartButton2.onClick.AddListener(RestartGame);
-            exitButton1.onClick.AddListener(ExitGame);
-            exitButton2.onClick.AddListener(ExitGame);
-            exitButton3.onClick.AddListener(ExitGame);
-            exitButton4.onClick.AddListener(ExitGame);
-            ShowUI(UIType.MAIN_MENU);
-            //mainMenuPanel.SetActive(true);
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            SwitchUI(UIPanelID.HEADS_UP_DISPLAY);
         }
 
-        private void ExitGame(){
-            Application.Quit();
-        }
-
-        private void RestartGame(){
-            GameManager.Instance.RestartGame();
-        }
-
-        private void ResumeGame(){
-            GameManager.Instance.ToogleGamePauseState();
-            CloseActiveUI();
-        }
-
-        private void StartGame(){
-            GameManager.Instance.StartGame();
-        }
-
-        public void ShowUI(UIType uIType){
-            Debug.Log("UI Typee" + uIType);
-            CloseActiveUI();
-            Cursor.lockState = CursorLockMode.None;
-            switch(uIType){
-                case UIType.MAIN_MENU : activeUI = mainMenuPanel; Time.timeScale = 0; break;
-                case UIType.HUD_MENU : activeUI = HUDPanel; Cursor.lockState = CursorLockMode.Locked; break;
-                case UIType.PAUSE_MENU : activeUI = pauseMenuPanel; Time.timeScale = 0; break;
-                case UIType.GAME_OVER_MENU : activeUI = gameOverPanel; Time.timeScale = 0; break;
-                case UIType.GAME_WON_MENU : activeUI = gameWonPanel; Time.timeScale = 0; break;
-            }
-            activeUI.SetActive(true);
-        }
-
-        public void CloseActiveUI(){
-            if(activeUI){
-                activeUI.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1;
+        private void AddUIPanelsToDictionary(){
+            uiPanelDictionary = new Dictionary<UIPanelID, GameObject>();
+            foreach(UIPanels uiPanel in uiPanelList){
+                uiPanelDictionary.Add(uiPanel.id, uiPanel.panel);
             }
         }
 
-        public void SetHUDData(string title, string action){
-            titleGUI.text = title;
-            actionGUI.text = action;
+        public void SwitchUI(UIPanelID id){
+            if(activeUIPanel){
+                activeUIPanel.SetActive(false);
+            }
+            if(!uiPanelDictionary.ContainsKey(id)) return;
+            activeUIPanel = uiPanelDictionary[id];
+            activeUIPanel.SetActive(true);
         }
     }
 }

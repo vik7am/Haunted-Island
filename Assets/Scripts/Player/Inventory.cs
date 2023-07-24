@@ -1,72 +1,42 @@
-using System.Collections.Generic;
 using UnityEngine;
+using HauntedIsland.Core;
+using System;
 
-namespace HauntedIsland.Old
+namespace HauntedIsland.Player
 {
-    public interface IInteractable{
-        public void Interact(Inventory inventory);
-        public string GetItemName();
-        public string GetActionInfo(Inventory inventory);
-    }
     public class Inventory : MonoBehaviour
     {
-        public List<Bone> boneList {get; private set;}
-        private Collider[] colliders;
-        [SerializeField] private float interactionRange;
-        [SerializeField] private LayerMask interactableLayer;
-        private Transform camTransform;
-        private IInteractable currentInteractable;
+        private ICollectable _collectable;
 
-        private void Start() {
-            camTransform = Camera.main.transform;
-            boneList = new List<Bone>();
-        }
+        public string CollectableName => _collectable.GetName();
+
+        public static event Action<bool> onHoldingBone;
 
         private void Update() {
-            if(Input.GetKeyDown(KeyCode.E) && currentInteractable != null){
-                currentInteractable.Interact(this);
+            if(Input.GetKeyDown(KeyCode.F) && _collectable != null){
+                DropCollectable();
             }
         }
 
-        private void FixedUpdate() {
-            CastRay();
+        public void AddCollectable(ICollectable collectable){
+            _collectable = collectable;
+            _collectable.Collect(transform);
+            onHoldingBone?.Invoke(true);
         }
 
-        private void CastRay(){
-            RaycastHit hitInfo;
-            if(Physics.Raycast(camTransform.position, camTransform.forward, out hitInfo, interactionRange, interactableLayer, QueryTriggerInteraction.Collide)){
-                IInteractable item = hitInfo.transform.GetComponent<IInteractable>();
-                if(currentInteractable != null && currentInteractable == item)
-                    return;
-                currentInteractable = item;
-                UpdateHUDUI();
-                UIManager.Instance.ShowUI(UIType.HUD_MENU);
-            }
-            else{
-                currentInteractable = null;
-                UIManager.Instance.CloseActiveUI();
-            }
+        public ICollectable GetCollectable(){
+            ICollectable collectable = _collectable;
+            _collectable = null;
+            onHoldingBone?.Invoke(false);
+            return collectable;
         }
 
-        private void UpdateHUDUI(){
-            string itemName = currentInteractable.GetItemName();
-            string itemInfo = currentInteractable.GetActionInfo(this);
-            UIManager.Instance.SetHUDData(itemName, itemInfo);
+        public void DropCollectable(){
+            _collectable.Drop(transform.position + transform.forward);
+            _collectable = null;
+            onHoldingBone?.Invoke(false);
         }
 
-        public void CollectItem(Bone bone){
-            boneList.Add(bone);
-            bone.transform.SetParent(transform);
-            bone.gameObject.SetActive(false);
-        }
-
-        public List<Bone> GetItems(){
-            return boneList;
-        }
-
-        public void DropItems(){
-            boneList.Clear();
-            UpdateHUDUI();
-        }
+        public bool HasCollectable => _collectable != null;
     }
 }
