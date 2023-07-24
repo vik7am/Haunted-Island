@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using HauntedIsland.Core;
 using System;
+using HauntedIsland.Interactable;
+using HauntedIsland.Player;
 
 namespace HauntedIsland.Ghost
 {
-    public class Bone : MonoBehaviour, ICollectable
+    public class Bone : MonoBehaviour, IInteractable, ICollectable
     {
         private BoneManager boneManager;
         private SphereCollider sphereCollider;
@@ -45,8 +47,17 @@ namespace HauntedIsland.Ghost
             return "Bone";
         }
 
-        public string InteractionMessage(){
+        public string InteractionMessage(Inventory inventory){
             return "Press E to Pickup " + GetName();
+        }
+
+        public void Interact(PlayerController player){
+            Inventory inventory = player.Inventory;
+            inventory .AddCollectable(this);
+        }
+
+        public bool IsInteractable(){
+            return sphereCollider.enabled == true;;
         }
     }
 }

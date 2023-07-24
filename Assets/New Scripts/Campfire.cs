@@ -26,5 +26,9 @@ namespace HauntedIsland.Interactable
             }
             return "";
         }
+
+        public bool IsInteractable(){
+            return true;
+        }
     }
 }

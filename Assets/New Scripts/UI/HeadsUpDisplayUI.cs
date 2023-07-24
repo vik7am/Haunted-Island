@@ -16,12 +16,10 @@ namespace HauntedIsland.UI
         
         private void OnEnable() {
             Interactor.onNearInteractable += DisplayInfo;
-            Collector.onNearCollectable += DisplayInfo;
         }
 
         private void OnDisable() {
             Interactor.onNearInteractable -= DisplayInfo;
-            Collector.onNearCollectable -= DisplayInfo;
         }
 
         private void DisplayInfo(Inventory inventory, IInteractable interactable){
@@ -32,16 +30,6 @@ namespace HauntedIsland.UI
             interactionPanel.SetActive(true);
             interactableNameUI.text = interactable.GetName();
             interactableActionUI.text = interactable.InteractionMessage(inventory);
-        }
-
-        private void DisplayInfo(ICollectable collectable){
-            if(collectable == null){
-                interactionPanel.SetActive(false);
-                return;
-            }
-            interactionPanel.SetActive(true);
-            interactableNameUI.text = collectable.GetName();
-            interactableActionUI.text = collectable.InteractionMessage();
         }
     }
 }

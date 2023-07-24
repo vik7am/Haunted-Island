@@ -24,7 +24,7 @@ namespace HauntedIsland
 
         private void OnDisable() {
             Inventory.onHoldingBone -= PlayerHoldingBone;
-            PlayerController.onNearGhost += PlayerNearGhost;
+            PlayerController.onNearGhost -= PlayerNearGhost;
         }
 
         private void PlayerNearGhost(bool value){

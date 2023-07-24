@@ -24,7 +24,10 @@ namespace HauntedIsland.Player
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && interactable != null){
                 interactable.Interact(player);
-                onNearInteractable?.Invoke(inventory, interactable);
+                if(interactable.IsInteractable())
+                    onNearInteractable?.Invoke(inventory, interactable);
+                else
+                    onNearInteractable?.Invoke(inventory, null);
             }
         }
 
