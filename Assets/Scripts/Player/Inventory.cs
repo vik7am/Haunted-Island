@@ -7,6 +7,7 @@ namespace HauntedIsland.Player
     public class Inventory : MonoBehaviour
     {
         private ICollectable _collectable;
+        [SerializeField] private Transform dropPosition;
 
         public string CollectableName => _collectable.GetName();
 
@@ -32,7 +33,7 @@ namespace HauntedIsland.Player
         }
 
         public void DropCollectable(){
-            _collectable.Drop(transform.position + transform.forward);
+            _collectable.Drop(dropPosition.position);
             _collectable = null;
             onHoldingBone?.Invoke(false);
         }

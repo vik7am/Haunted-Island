@@ -8,13 +8,14 @@ namespace HauntedIsland.Player
         [SerializeField] private Transform playerTransform;
         private float mouseX, mouseY;
         private float xRotation;
-        private bool cameraDisabled;
+        private bool cameraActive;
         private Vector3 orignalPosition;
         private Quaternion originalRotation;
         private Camera _camera;
         private Color skyColor;
 
         private void Awake() {
+            cameraActive = true;
             _camera = GetComponent<Camera>();
             skyColor = new Color(0.4581257f, 0.5297253f, 0.6698113f, 0);
         }
@@ -22,6 +23,10 @@ namespace HauntedIsland.Player
         private void OnEnable() {
             PlayerController.onPlayerKilled += DisableCameraMovement;
             LightManager.onEnableDarkMode += OnEnabledarkMode;
+        }
+
+        private void SetCameraMovementEnabled(bool status){
+            cameraActive = status;
         }
 
         private void OnDisable() {
@@ -36,7 +41,7 @@ namespace HauntedIsland.Player
         }
 
         void LateUpdate(){
-            if(cameraDisabled) return;
+            if(!cameraActive) return;
             UpdatePlayerRotation();
             UpdatateCameraRotation();
         }
@@ -47,7 +52,7 @@ namespace HauntedIsland.Player
         }
 
         private void DisableCameraMovement(){
-            cameraDisabled = true;
+            SetCameraMovementEnabled(false);
         }
 
         public void ChangeBackgroundColor(){

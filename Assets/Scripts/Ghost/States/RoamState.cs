@@ -8,6 +8,7 @@ namespace HauntedIsland.Ghost
         private Vector3 destination;
         private bool destinationFound;
         private NavMeshAgent navMeshAgent;
+        private float currentIdleDuration;
 
         public RoamState(GhostStateMachine ghostStateMachine) : base(ghostStateMachine){
             navMeshAgent = ghostStateMachine.NavMeshAgent;
@@ -19,10 +20,13 @@ namespace HauntedIsland.Ghost
         }
 
         public override void Update(){
-            if(destinationFound)
+            if(destinationFound){
                 CheckDistance();
+                CheckIdleState();
+            }
             else
                 FindNextDestination();
+            
         }
 
         public void CheckDistance(){
@@ -40,6 +44,18 @@ namespace HauntedIsland.Ghost
                 navMeshAgent.SetDestination(destination);
                 destinationFound = true;
             }
+        }
+
+        private void CheckIdleState(){
+            if(navMeshAgent.velocity.magnitude < Mathf.Epsilon){
+                currentIdleDuration += Time.deltaTime;
+                if(currentIdleDuration >= ghostStateMachine.IdleDuration){
+                    FindNextDestination();
+                    currentIdleDuration = 0;
+                }
+            }
+            else
+                currentIdleDuration = 0;
         }
 
         public bool TryToFindRandomPoint(Vector3 origin, float range, out Vector3 result){

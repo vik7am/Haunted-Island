@@ -1,5 +1,6 @@
 using System;
 using HauntedIsland.Ghost;
+using HauntedIsland.Manager;
 using UnityEngine;
 
 namespace HauntedIsland.Player
@@ -9,6 +10,7 @@ namespace HauntedIsland.Player
         [SerializeField] private Light spotLight;
         [SerializeField] private LayerMask ghostLayer;
         [SerializeField] private float ghostRange;
+        [SerializeField] private float seaLevel;
         private PlayerMovement playerMovement;
         private Inventory inventory;
         private bool isGhostNearby;
@@ -35,13 +37,21 @@ namespace HauntedIsland.Player
             spotLight.enabled = status;
         }
 
-        public void KillPlayer(){
+        public void KillPlayer(string killMessage){
             playerMovement.SetMovementEnabled(false);
+            GameManager.Instance.gameOverMessage = killMessage;
             onPlayerKilled?.Invoke();
         }
 
         private void Update() {
             CheckForGhost();
+            CheckForDrowning();
+        }
+
+        private void CheckForDrowning(){
+            if(transform.position.y < seaLevel){
+                KillPlayer("You have Drowned");
+            }
         }
 
         private void CheckForGhost(){

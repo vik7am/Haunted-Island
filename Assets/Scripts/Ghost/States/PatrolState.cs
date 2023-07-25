@@ -9,6 +9,7 @@ namespace HauntedIsland.Ghost
         private Vector3 destination;
         private BoneManager boneManager;
         private NavMeshAgent navMeshAgent;
+        private float currentIdleDuration;
 
         public PatrolState(GhostStateMachine ghostStateMachine) : base(ghostStateMachine){
             boneManager = ghostStateMachine.GhostController.BoneManager;
@@ -31,6 +32,19 @@ namespace HauntedIsland.Ghost
             destination = bone.transform.position;
             navMeshAgent.SetDestination(destination);
             CheckDestination();
+            CheckIdleState();
+        }
+
+        private void CheckIdleState(){
+            if(navMeshAgent.velocity.magnitude < Mathf.Epsilon){
+                currentIdleDuration += Time.deltaTime;
+                if(currentIdleDuration >= ghostStateMachine.IdleDuration){
+                    boneManager.GetNextBone();
+                    currentIdleDuration = 0;
+                }
+            }
+            else
+                currentIdleDuration = 0;
         }
 
         private void CheckDestination(){

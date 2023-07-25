@@ -586,6 +586,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5004953226564165370, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
+      propertyPath: seaLevel
+      value: 8.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004953226564165370, guid: 68f3363bc365e4a4099320dacebdddbd, type: 3}
       propertyPath: spotLight
       value: 
       objectReference: {fileID: 1091569382}

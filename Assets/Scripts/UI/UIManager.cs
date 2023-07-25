@@ -3,10 +3,9 @@ using UnityEngine;
 using HauntedIsland.Ghost;
 using HauntedIsland.Player;
 
-
 namespace HauntedIsland.UI
 {
-    public enum UIPanelID{HEADS_UP_DISPLAY, GAME_WON, GAME_OVER}
+    public enum UIPanelID{HEADS_UP_DISPLAY, GAME_WON, GAME_OVER, GAME_PAUSE}
 
     [System.Serializable]
     public class UIPanels{
@@ -34,6 +33,13 @@ namespace HauntedIsland.UI
             PlayerController.onPlayerKilled -= SwitchToGameOverUI;
         }
 
+        private void SwitchToHUDUI(){
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            SwitchUI(UIPanelID.HEADS_UP_DISPLAY);
+        }
+
         private void SwitchToGameWonUI(){
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
@@ -46,13 +52,28 @@ namespace HauntedIsland.UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SwitchUI(UIPanelID.GAME_OVER);
+
+        }
+
+        private void SwitchToGamePauseUI(){
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SwitchUI(UIPanelID.GAME_PAUSE);
         }
 
         private void Start() {
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            SwitchUI(UIPanelID.HEADS_UP_DISPLAY);
+            SwitchToHUDUI();
+        }
+
+        private void Update() {
+            if(Input.GetKeyDown(KeyCode.Escape)){
+                SwitchToGamePauseUI();
+            }
+        }
+
+        public void ResumeGame(){
+            SwitchToHUDUI();
         }
 
         private void AddUIPanelsToDictionary(){

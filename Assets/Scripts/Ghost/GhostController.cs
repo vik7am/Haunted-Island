@@ -40,7 +40,7 @@ namespace HauntedIsland.Ghost
 
         private void OnTriggerEnter(Collider other) {
             if(other.TryGetComponent<PlayerController>(out PlayerController player)){
-                player.KillPlayer();
+                player.KillPlayer("Killed by Ghost");
             }
         }
     }
