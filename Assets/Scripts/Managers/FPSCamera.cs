@@ -22,7 +22,7 @@ namespace HauntedIsland.Player
 
         private void OnEnable() {
             PlayerController.onPlayerKilled += DisableCameraMovement;
-            LightManager.onEnableDarkMode += OnEnabledarkMode;
+            LightManager.onDayNightChange += ChangeSkyColor;
         }
 
         private void SetCameraMovementEnabled(bool status){
@@ -31,7 +31,7 @@ namespace HauntedIsland.Player
 
         private void OnDisable() {
             PlayerController.onPlayerKilled -= DisableCameraMovement;
-            LightManager.onEnableDarkMode -= OnEnabledarkMode;
+            LightManager.onDayNightChange -= ChangeSkyColor;
         }
 
         private void Start() {
@@ -45,9 +45,9 @@ namespace HauntedIsland.Player
             UpdatePlayerRotation();
             UpdatateCameraRotation();
         }
-        
-        private void OnEnabledarkMode(bool status){
-            Color color = (status)? Color.black: skyColor;
+
+        private void ChangeSkyColor(bool isDay){
+            Color color = (isDay)? skyColor: Color.black;
             _camera.backgroundColor = color;
         }
 

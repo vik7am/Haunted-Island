@@ -12,21 +12,23 @@ namespace HauntedIsland.UI
         [SerializeField] private TextMeshProUGUI interactableActionUI;
         
         private void OnEnable() {
-            Interactor.onNearInteractable += DisplayInfo;
+            Interactor.onInteractableEnter += DisplayInfoPanel;
+            Interactor.onInteractableExit += HideInfoPanel;
         }
 
         private void OnDisable() {
-            Interactor.onNearInteractable -= DisplayInfo;
+            Interactor.onInteractableEnter -= DisplayInfoPanel;
+            Interactor.onInteractableExit -= HideInfoPanel;
         }
 
-        private void DisplayInfo(Inventory inventory, IInteractable interactable){
-            if(interactable == null){
-                interactionPanel.SetActive(false);
-                return;
-            }
+        private void DisplayInfoPanel(Inventory inventory, IInteractable interactable){
             interactionPanel.SetActive(true);
             interactableNameUI.text = interactable.GetName();
             interactableActionUI.text = interactable.InteractionMessage(inventory);
+        }
+
+        private void HideInfoPanel(){
+            interactionPanel.SetActive(false);
         }
     }
 }

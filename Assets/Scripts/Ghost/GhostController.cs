@@ -11,25 +11,26 @@ namespace HauntedIsland.Ghost
         private GhostStateMachine ghostStateMachine;
 
         public BoneManager BoneManager => boneManager;
+        
         public static event Action onGhostKilled;
 
         private void Awake() {
             ghostStateMachine = GetComponent<GhostStateMachine>();
-            ShowGhostBody(false);
+            ToggleGhostVisibility(true);
         }
         
         private void OnEnable() {
             boneManager.onAllBonesDestroyed += KillGhost;
-            LightManager.onEnableDarkMode += ShowGhostBody;
+            LightManager.onDayNightChange += ToggleGhostVisibility;
         }
 
         private void OnDisable() {
             boneManager.onAllBonesDestroyed -= KillGhost;
-            LightManager.onEnableDarkMode -= ShowGhostBody;
+            LightManager.onDayNightChange -= ToggleGhostVisibility;
         }
 
-        private void ShowGhostBody(bool statue){
-            ghostMeshRenderer.enabled = statue;
+        private void ToggleGhostVisibility(bool isDay){
+            ghostMeshRenderer.enabled = !isDay;
         }
 
         private void KillGhost(){

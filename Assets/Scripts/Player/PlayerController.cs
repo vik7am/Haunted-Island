@@ -16,7 +16,7 @@ namespace HauntedIsland.Player
         private bool isGhostNearby;
 
         public Inventory Inventory => inventory;
-
+        
         public static event Action onPlayerKilled;
         public static event Action<bool> onNearGhost;
 
@@ -26,15 +26,15 @@ namespace HauntedIsland.Player
         }
 
         private void OnEnable() {
-            LightManager.onEnableDarkMode += OnEnableDarkMode;
+            LightManager.onDayNightChange += ToggleSpotLight;
         }
 
         private void OnDisable() {
-            LightManager.onEnableDarkMode -= OnEnableDarkMode;
+            LightManager.onDayNightChange -= ToggleSpotLight;
         }
 
-        private void OnEnableDarkMode(bool status){
-            spotLight.enabled = status;
+        private void ToggleSpotLight(bool isDay){
+            spotLight.enabled = !isDay;
         }
 
         public void KillPlayer(string killMessage){
@@ -56,16 +56,10 @@ namespace HauntedIsland.Player
 
         private void CheckForGhost(){
             Collider[] colliders = Physics.OverlapSphere(transform.position, ghostRange, ghostLayer, QueryTriggerInteraction.Collide);
-            foreach(Collider collider in colliders){
-                if(collider.GetComponent<GhostController>()){
-                    isGhostNearby = true;
-                    onNearGhost?.Invoke(true);
-                    return;
-                }
-            }
-            if(isGhostNearby){
-                isGhostNearby = false;
-                onNearGhost?.Invoke(false);
+            bool ghostFound = Array.Exists(colliders, collider => collider.GetComponent<GhostController>() != null);
+            if(isGhostNearby != ghostFound){
+                isGhostNearby = ghostFound;
+                onNearGhost?.Invoke(isGhostNearby);
             }
         }
     }

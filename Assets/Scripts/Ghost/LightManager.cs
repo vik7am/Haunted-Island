@@ -6,22 +6,23 @@ namespace HauntedIsland
 {
     public class LightManager : MonoBehaviour
     {
-        public static event Action<bool> onEnableDarkMode;
         private bool isPlayerNearGhost;
         private bool isPlayerHoldingBone;
         private Light _light;
+
+        public static event Action<bool> onDayNightChange;
         
         private void Awake() {
             _light = GetComponent<Light>();
         }
 
         private void OnEnable() {
-            Inventory.onHoldingBone += PlayerHoldingBone;
+            Inventory.onBonePickDrop += PlayerHoldingBone;
             PlayerController.onNearGhost += PlayerNearGhost;
         }
 
         private void OnDisable() {
-            Inventory.onHoldingBone -= PlayerHoldingBone;
+            Inventory.onBonePickDrop -= PlayerHoldingBone;
             PlayerController.onNearGhost -= PlayerNearGhost;
         }
 
@@ -30,19 +31,19 @@ namespace HauntedIsland
             UpdateLighting();
         }
 
-        private void PlayerHoldingBone(bool value){
-            isPlayerHoldingBone = value;
+        private void PlayerHoldingBone(bool isHoldingBone){
+            isPlayerHoldingBone = isHoldingBone;
             UpdateLighting();
         }
 
         private void UpdateLighting(){
             if(isPlayerNearGhost || isPlayerHoldingBone){
                 _light.enabled = false;
-                onEnableDarkMode?.Invoke(true);
+                onDayNightChange?.Invoke(false);
             }
             else{
                 _light.enabled = true;
-                onEnableDarkMode?.Invoke(false);
+                onDayNightChange?.Invoke(true);
             }
         }
     }

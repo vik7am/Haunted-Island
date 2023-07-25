@@ -6,12 +6,12 @@ namespace HauntedIsland.Player
 {
     public class Inventory : MonoBehaviour
     {
-        private ICollectable _collectable;
         [SerializeField] private Transform dropPosition;
+        private ICollectable _collectable;
 
         public string CollectableName => _collectable.GetName();
 
-        public static event Action<bool> onHoldingBone;
+        public static event Action<bool> onBonePickDrop;
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.F) && _collectable != null){
@@ -22,20 +22,20 @@ namespace HauntedIsland.Player
         public void AddCollectable(ICollectable collectable){
             _collectable = collectable;
             _collectable.Collect(transform);
-            onHoldingBone?.Invoke(true);
+            onBonePickDrop?.Invoke(true);
         }
 
         public ICollectable GetCollectable(){
             ICollectable collectable = _collectable;
             _collectable = null;
-            onHoldingBone?.Invoke(false);
+            onBonePickDrop?.Invoke(false);
             return collectable;
         }
 
         public void DropCollectable(){
             _collectable.Drop(dropPosition.position);
             _collectable = null;
-            onHoldingBone?.Invoke(false);
+            onBonePickDrop?.Invoke(false);
         }
 
         public bool HasCollectable => _collectable != null;
