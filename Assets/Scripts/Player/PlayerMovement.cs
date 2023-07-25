@@ -9,6 +9,10 @@ namespace HauntedIsland.Player
         private Vector3 movementInput;
         private Vector3 movementDirection;
         private bool movementEnabled;
+        private Vector3 playerVelocity;
+        private bool groundedPlayer;
+        private float jumpHeight = 1.0f;
+        private float gravityValue = -9.81f;
 
         private void Awake() {
             characterController = GetComponent<CharacterController>();
@@ -20,8 +24,28 @@ namespace HauntedIsland.Player
 
         private void Update(){
             if(!movementEnabled) return;
+            CheckGround();
             GetPlayerMovementInput();
             UpdatePlayerMovement();
+            CheckJumpInput();
+            ApplyGravity();
+            characterController.Move(playerVelocity * Time.deltaTime);
+        }
+
+        private void ApplyGravity(){
+            playerVelocity.y += gravityValue * Time.deltaTime;
+        }
+
+        private void CheckJumpInput(){
+            if (Input.GetButtonDown("Jump") && groundedPlayer)
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        private void CheckGround(){
+            groundedPlayer = characterController.isGrounded;
+            if (groundedPlayer && playerVelocity.y < 0){
+                playerVelocity.y = 0f;
+            }
         }
 
         private void GetPlayerMovementInput(){
@@ -31,8 +55,9 @@ namespace HauntedIsland.Player
 
         private void UpdatePlayerMovement(){
             movementDirection = transform.forward*movementInput.z + transform.right*movementInput.x;
-            if(characterController)
-                characterController.SimpleMove(movementDirection.normalized * movementSpeed);
+            movementDirection = movementDirection.normalized * movementSpeed;
+            playerVelocity.x = movementDirection.x;
+            playerVelocity.z = movementDirection.z;
         }
 
         public bool IsIdle => movementDirection == Vector3.zero;

@@ -83,7 +83,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5004953226564165370
 MonoBehaviour:
@@ -102,6 +102,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   ghostRange: 12
+  seaLevel: 8.2
 --- !u!114 &6065020600404826593
 MonoBehaviour:
   m_ObjectHideFlags: 0
