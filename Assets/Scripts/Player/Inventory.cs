@@ -10,7 +10,6 @@ namespace HauntedIsland.Player
         private ICollectable _collectable;
 
         public string CollectableName => _collectable.GetName();
-
         public static event Action<bool> onBonePickDrop;
 
         private void Update() {

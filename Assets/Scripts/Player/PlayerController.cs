@@ -1,5 +1,4 @@
 using System;
-using HauntedIsland.Ghost;
 using HauntedIsland.Manager;
 using UnityEngine;
 
@@ -7,18 +6,16 @@ namespace HauntedIsland.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private FPSCamera fpsCamera;
+        [SerializeField] private Transform playerHead;
         [SerializeField] private Light spotLight;
-        [SerializeField] private LayerMask ghostLayer;
-        [SerializeField] private float ghostRange;
         [SerializeField] private float seaLevel;
         private PlayerMovement playerMovement;
         private Inventory inventory;
-        private bool isGhostNearby;
+        private Camera _camera;
 
         public Inventory Inventory => inventory;
-        
         public static event Action onPlayerKilled;
-        public static event Action<bool> onNearGhost;
 
         private void Awake() {
             playerMovement = GetComponent<PlayerMovement>();
@@ -33,6 +30,26 @@ namespace HauntedIsland.Player
             LightManager.onDayNightChange -= ToggleSpotLight;
         }
 
+        private void Start() {
+            AttachFPSCameraToHead();
+            AttachSpotLightToFPSCamera();
+        }
+
+        private void Update() {
+            CheckForDrowning();
+        }
+
+        private void AttachFPSCameraToHead(){
+            fpsCamera.transform.SetParent(playerHead);
+            fpsCamera.transform.localPosition = Vector3.zero;
+            fpsCamera.SetPlayerTransform(transform);
+        }
+
+        private void AttachSpotLightToFPSCamera(){
+            spotLight.transform.SetParent(fpsCamera.transform);
+            spotLight.transform.localPosition = Vector3.zero;
+        }
+
         private void ToggleSpotLight(bool isDay){
             spotLight.enabled = !isDay;
         }
@@ -43,23 +60,9 @@ namespace HauntedIsland.Player
             onPlayerKilled?.Invoke();
         }
 
-        private void Update() {
-            CheckForGhost();
-            CheckForDrowning();
-        }
-
         private void CheckForDrowning(){
             if(transform.position.y < seaLevel){
                 KillPlayer("You have Drowned");
-            }
-        }
-
-        private void CheckForGhost(){
-            Collider[] colliders = Physics.OverlapSphere(transform.position, ghostRange, ghostLayer, QueryTriggerInteraction.Collide);
-            bool ghostFound = Array.Exists(colliders, collider => collider.GetComponent<GhostController>() != null);
-            if(isGhostNearby != ghostFound){
-                isGhostNearby = ghostFound;
-                onNearGhost?.Invoke(isGhostNearby);
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using HauntedIsland.Ghost;
 using HauntedIsland.Player;
 using UnityEngine;
 
@@ -18,12 +19,12 @@ namespace HauntedIsland
 
         private void OnEnable() {
             Inventory.onBonePickDrop += PlayerHoldingBone;
-            PlayerController.onNearGhost += PlayerNearGhost;
+            GhostController.onPlayerDetected += PlayerNearGhost;
         }
 
         private void OnDisable() {
             Inventory.onBonePickDrop -= PlayerHoldingBone;
-            PlayerController.onNearGhost -= PlayerNearGhost;
+            GhostController.onPlayerDetected -= PlayerNearGhost;
         }
 
         private void PlayerNearGhost(bool value){

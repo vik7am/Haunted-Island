@@ -11,7 +11,6 @@ namespace HauntedIsland.Player
         private PlayerController player;
 
         public Inventory Inventory => inventory;
-
         public static event Action<Inventory, IInteractable> onInteractableEnter;
         public static event Action onInteractableExit;
 

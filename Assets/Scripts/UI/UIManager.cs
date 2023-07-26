@@ -33,6 +33,16 @@ namespace HauntedIsland.UI
             PlayerController.onPlayerKilled -= SwitchToGameOverUI;
         }
 
+        private void Start() {
+            SwitchToHUDUI();
+        }
+
+        private void Update() {
+            if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)){
+                SwitchToGamePauseUI();
+            }
+        }
+
         private void SwitchToHUDUI(){
             Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
@@ -52,7 +62,6 @@ namespace HauntedIsland.UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SwitchUI(UIPanelID.GAME_OVER);
-
         }
 
         private void SwitchToGamePauseUI(){
@@ -60,16 +69,6 @@ namespace HauntedIsland.UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SwitchUI(UIPanelID.GAME_PAUSE);
-        }
-
-        private void Start() {
-            SwitchToHUDUI();
-        }
-
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.Escape)){
-                SwitchToGamePauseUI();
-            }
         }
 
         public void ResumeGame(){

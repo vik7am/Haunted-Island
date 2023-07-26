@@ -23,17 +23,19 @@ namespace HauntedIsland.Ghost
         public void Collect(Transform playerTransform){
             transform.SetParent(playerTransform);
             transform.localPosition = Vector3.zero;
-            sphereCollider.enabled = false;
-            _rigidbody.useGravity = false;
-            transform.GetChild(0).gameObject.SetActive(false);
+            ToggleBoneAttributes(false);
         }
 
         public void Drop(Vector3 dropPosition){
             transform.SetParent(boneManager.transform);
             transform.position = dropPosition;
-            sphereCollider.enabled = true;
-            _rigidbody.useGravity = true;
-            transform.GetChild(0).gameObject.SetActive(true);
+            ToggleBoneAttributes(true);
+        }
+
+        private void ToggleBoneAttributes(bool status){
+            sphereCollider.enabled = status;
+            _rigidbody.useGravity = status;
+            transform.GetChild(0).gameObject.SetActive(status);
         }
 
         public void Destroy(){

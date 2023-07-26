@@ -7,7 +7,13 @@ namespace HauntedIsland.Manager
 
     public class GameManager : GenericMonoSingleton<GameManager>
     {
+        [SerializeField] private int defaultMouseSensitivity;
+        public int mouseSensitivity {get; set;}
         public string gameOverMessage {get; set;}
+
+        private void Start() {
+            mouseSensitivity = defaultMouseSensitivity;
+        }
 
         public void RestartGame(){
             StartGame();
