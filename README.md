@@ -4,6 +4,8 @@ Haunted Island is a Horror first-person game where you are stuck on a haunted is
 
 <img src= "https://i.imgur.com/FrZm7C6.png">
 
+[Click Here](https://vik7am.itch.io/haunted-island) to play WebGL Build.
+
 ### Design Patterns Used
 1. Singleton - Added Singleton classes to create GameManager.
 2. State Machine - It is used to define enemy movement states like idle, patrolling, and roaming.
