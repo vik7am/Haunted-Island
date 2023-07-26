@@ -1,25 +1,31 @@
 using UnityEngine;
+using HauntedIsland.Player;
+using HauntedIsland.Core;
 
-namespace HauntedIsland
+namespace HauntedIsland.Interactable
 {
-    public class CampFire : MonoBehaviour, IInteractable
+    public class Campfire : MonoBehaviour, IInteractable
     {
-        public string GetItemName(){
+        public string GetName(){
             return "Campfire";
         }
 
-        public string GetActionInfo(Inventory inventory){
-            if(inventory.GetItems().Count > 0)
-                return "Press E to Burn Bones";
+        public void Interact(PlayerController player){
+            Inventory inventory = player.Inventory;
+            if(!inventory.HasCollectable) return;
+            ICollectable collectable = inventory.GetCollectable();
+            collectable.Destroy();
+        }
+
+        public string InteractionMessage(Inventory inventory){
+            if(inventory.HasCollectable){
+                return "Press E to burn " + inventory.CollectableName;
+            }
             return "";
         }
 
-        public void Interact(Inventory inventory){
-            foreach(Bone bone in inventory.boneList){
-                bone.BurnBone();
-                Destroy(bone.gameObject);
-            }
-            inventory.DropItems();
+        public bool IsInteractable(){
+            return true;
         }
     }
 }
