@@ -1,19 +1,22 @@
 # Haunted Island
 
-Haunted Island is a Horror first person game where you are stuck on a haunted island where ghosts patroll at night and you must find a way to eliminate ghosts and escape from the island.
+Haunted Island is a Horror first-person game where you are stuck on a haunted island where ghosts patrol at night and you must find a way to eliminate ghosts and escape from the island.
 
-<img src= "https://i.imgur.com/JvEZfd7.png">
+<img src= "https://i.imgur.com/FrZm7C6.png">
 
 ### Design Patterns Used
-1. Singleton - Added Singleton classes to create Game nad UI manager.
-2. State Machine - It used to define enemy movement states like idle, patrolling and chasing.
+1. Singleton - Added Singleton classes to create GameManager.
+2. State Machine - It is used to define enemy movement states like idle, patrolling, and roaming.
+3. Observer Pattern - C# Events are used to broadcast and inform all its subscribers to perform their actions accordingly.
 
 ### Features
-1. First person for immersion - First person view make game more scary and immersive.
-2. Dark environment - You have to navigate the island using a flashlight in tatally dark environment.
-3. Enemy AI - Enemy and patrolls in random directions usign NavmeshAgent and chases player if it's within range. .
-4. Campfire - Campfire provides players a safe area when enemies will not enter.
-5. Inventory System - Player can collect and drop from it's inventory.
+1. First person for immersion - First-person view makes the game more scary and immersive.
+2. Dark environment - Whenever you go near the ghost or hold its bone you have to navigate the island using a flashlight in a dark environment.
+3. Enemy AI - Ghost patrols around its bones and roams in random directions using NavmeshAgent and kills the player if he gets too close.
+4. Campfire - Campfires can be used to burn bones.
+5. Bones - Can be picked up and dropped by the player and make the environment dark while the player is holding it. 
+5. Inventory System - The player can collect and drop items from their inventory.
+6. Drowning - The player will drown if he jumps into the deep water.
 
 ### Best Practices Used
 1. Proper naming convention for methods and variables.
