@@ -27,3 +27,15 @@ Haunted Island is a Horror first-person game where you are stuck on a haunted is
 4. Caching data to reduce function calls.
 5. Enums to improve code readability.
 6. Generic classes to reduce code repetition.
+
+### Gameplay Screenshots
+<p float="left">
+<img src= "https://i.imgur.com/ewsZo0x.jpg" width="48%">
+<img src= "https://i.imgur.com/PuoxWu4.jpg" width="48%">
+<img src= "https://i.imgur.com/49uLEkE.jpg" width="48%">
+<img src= "https://i.imgur.com/6ZatL0v.jpg" width="48%">
+<img src= "https://i.imgur.com/KJIUACv.jpg" width="48%">
+<img src= "https://i.imgur.com/uOsy8Sn.jpg" width="48%">
+<img src= "https://i.imgur.com/SIzMHVw.jpg" width="48%">
+<img src= "https://i.imgur.com/BPbq1YE.jpg" width="48%"> 
+</p>   
